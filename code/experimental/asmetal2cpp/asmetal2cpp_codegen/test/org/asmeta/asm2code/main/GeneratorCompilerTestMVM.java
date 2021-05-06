@@ -10,6 +10,8 @@ import java.util.List;
 import org.asmeta.asm2code.main.CppGenerator;
 import org.asmeta.asm2code.main.HeaderGenerator;
 import org.asmeta.asm2code.main.TranslatorOptions.CompilerType;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.asmeta.asm2code.compiler.CompileResult;
 import org.asmeta.asm2code.compiler.CppCompiler;
 import org.asmeta.parser.ASMParser;
@@ -23,9 +25,11 @@ public class GeneratorCompilerTestMVM extends GeneratorCompilerTest2 {
 	@Test
 	public void testMVM() throws IOException, Exception {
 		TranslatorOptions options= new TranslatorOptions(false, true, true, true);
+		Logger.getLogger(CppCompiler.class).setLevel(Level.ALL);
 		//options.compilerType = CompilerType.DesktopCompiler;
-		options.compilerType = CompilerType.ArduinoCompiler;
-		String asmspec = "D:\\AgHome\\progettidaSVNGIT\\mvm-asmeta\\VentilatoreASM\\Ventilatore000.asm";
+		options.compilerType = CompilerType.DesktopCompiler;
+		CppCompiler.setCompiler("g++");
+		String asmspec = "C:\\Users\\Belotti Andrea\\git\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3.asm";
 		if (!test(asmspec,options).success)
 			fail();
 	}
