@@ -21,6 +21,7 @@ public class TestExampleInDir extends TestValidator {
 	
 	@Test
 	public void testAllAvallaInAsmExamples() throws Exception {
+		Logger.getLogger()
 		testInDir("../../../../asm_examples");
 	}
 
