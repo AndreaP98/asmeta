@@ -61,6 +61,7 @@ public class AsmToUnitModuleTest {
 	@Test
 	public void testMVM() throws Exception {
 		Logger.getLogger(CppCompiler.class).setLevel(Level.ALL);
+		CppCompiler.setCompiler("g++");
 		// testSpec(UNITFM.BOOST,
 		// "D:\\AgHome\\progettidaSVNGIT\\mvm-asmeta\\VentilatoreASM\\Ventilatore000.asm",SIMULATOR,"1",
 		// "5");
@@ -74,8 +75,8 @@ public class AsmToUnitModuleTest {
 		//		SIMULATOR, "1", "5");
 		//testSpec(UNITFM.CATCH2, "D:\\ProgettoTesi\\FileTesi\\mvm-asmeta-master\\VentilatoreASM\\Ventilatore2.asm",
 		//		SIMULATOR, "1", "5");
-		testSpec(UNITFM.CATCH2, "D:\\ProgettoTesi\\FileTesi\\mvm-asmeta-master\\VentilatoreASM_NewTime\\Ventilatore3.asm",
-				SIMULATOR, "1", "5");
+		//testSpec(UNITFM.CATCH2, "C:\\Users\\Belotti Andrea\\git\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3.asm",
+		//		SIMULATOR, "1", "5");
 		
 	}
 
