@@ -50,11 +50,11 @@ public class FindMonitoredInControlledFunct extends ReflectiveVisitor<Boolean> {
 	def boolean visit(EnumTerm term) {
 		return false
 	}
-	
+
 	def boolean visit(VariableTerm term) {
 		return false
 	}
-	
+
 	def boolean visit(SequenceTerm term) {
 		return false
 	}
@@ -79,27 +79,22 @@ public class FindMonitoredInControlledFunct extends ReflectiveVisitor<Boolean> {
 		for (result : term.resultTerms)
 			found = (found || visit(result));
 		found = (found || visit(term.comparedTerm));
-		if (term.otherwiseTerm!==null)
-		found = (found || visit(term.otherwiseTerm));
+		if (term.otherwiseTerm !== null)
+			found = (found || visit(term.otherwiseTerm));
 		return found
 	}
-	
-	
-	
-	
-/** TODO: DELETE FOR COVERAGE 	def boolean visit(ConditionalTerm term) {
+
+	def boolean visit(ConditionalTerm term) {
 		var boolean found = false
 		found = (found || visit(term.thenTerm));
-		found = (found || visit(term.elseTerm));
+		if (term.elseTerm !== null) found = (found || visit(term.elseTerm));
 		return found
 	}
-	
-	
+
 	def boolean visit(SetTerm term) {
 		var boolean found = false
 		for (comparing : term.term)
 			found = (found || visit(comparing));
 		return found
 	}
-*/
 }

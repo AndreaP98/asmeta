@@ -22,14 +22,30 @@ import asmeta.AsmCollection;
 // to test with MVM 
 public class GeneratorCompilerTestMVM extends GeneratorCompilerTest2 {
 
+	
+	@Test
+	public void testTimer() throws IOException, Exception {
+		TranslatorOptions options= new TranslatorOptions(false, true, true, true);
+		Logger.getLogger(CppCompiler.class).setLevel(Level.ALL);
+		
+		//options.compilerType = CompilerType.DesktopCompiler;
+		options.compilerType = CompilerType.DesktopCompiler;
+		CppCompiler.setCompiler("g++");
+		String asmspec = "..\\..\\..\\..\\..\\mvm-asmeta\\VentilatoreASM_NewTime\\TimeLibrary.asm";
+		if (!test(asmspec,options).success)
+			fail();
+	}
+
+	
 	@Test
 	public void testMVM() throws IOException, Exception {
 		TranslatorOptions options= new TranslatorOptions(false, true, true, true);
 		Logger.getLogger(CppCompiler.class).setLevel(Level.ALL);
+		
 		//options.compilerType = CompilerType.DesktopCompiler;
 		options.compilerType = CompilerType.DesktopCompiler;
 		CppCompiler.setCompiler("g++");
-		String asmspec = "C:\\Users\\Belotti Andrea\\git\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3.asm";
+		String asmspec = "..\\..\\..\\..\\..\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3.asm";
 		if (!test(asmspec,options).success)
 			fail();
 	}
