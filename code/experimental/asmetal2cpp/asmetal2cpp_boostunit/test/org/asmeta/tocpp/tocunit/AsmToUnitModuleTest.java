@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +21,8 @@ import org.asmeta.asm2code.compiler.CppCompiler;
 import org.asmeta.asm2code.main.CppGenerator;
 import org.asmeta.asm2code.main.HeaderGenerator;
 import org.asmeta.asm2code.main.TranslatorOptions;
+import org.asmeta.simulator.Environment;
+import org.asmeta.simulator.Environment.TimeMngt;
 import org.asmeta.simulator.main.Simulator;
 import org.asmeta.tocpp.abstracttestgenerator.AsmTSGeneratorByNuSMV;
 import org.asmeta.tocpp.abstracttestgenerator.AsmTestGenerator;
@@ -61,6 +64,9 @@ public class AsmToUnitModuleTest {
 	@Test
 	public void testMVM() throws Exception {
 		Logger.getLogger(CppCompiler.class).setLevel(Level.ALL);
+		Environment.timeMngt = TimeMngt.auto_increment;
+		Environment.currentTimeUnit = ChronoUnit.SECONDS;
+		Environment.auto_increment_delta = 1;
 		CppCompiler.setCompiler("g++");
 		// testSpec(UNITFM.BOOST,
 		// "D:\\AgHome\\progettidaSVNGIT\\mvm-asmeta\\VentilatoreASM\\Ventilatore000.asm",SIMULATOR,"1",
@@ -77,7 +83,8 @@ public class AsmToUnitModuleTest {
 		//		SIMULATOR, "1", "5");
 		//testSpec(UNITFM.CATCH2, "C:\\Users\\Belotti Andrea\\git\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3.asm",
 		//		SIMULATOR, "1", "5");
-		
+		testSpec(UNITFM.CATCH2,
+		 "../../../../../mvm-asmeta/VentilatoreASM_NewTime/Ventilatore3.asm",SIMULATOR,"5","5");		
 	}
 
 	//Belotti Andrea Test creazione Timer
