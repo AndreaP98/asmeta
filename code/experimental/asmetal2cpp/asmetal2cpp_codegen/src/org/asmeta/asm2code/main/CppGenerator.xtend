@@ -358,7 +358,8 @@ class CppGenerator extends AsmToCGenerator {
 		var boolean containsMonitored = false
 		if (asm.defaultInitialState !== null && asm.defaultInitialState.functionInitialization !== null) {
 			for (fd : asm.defaultInitialState.functionInitialization) {
-				println("Function defined " + fd.initializedFunction.name)
+		println("Function defined " + fd.initializedFunction.name)
+
 				// containsMonitored=new FindMonitoredInControlledFunct(asm,mo).visit(fd.initializedFunction.initialization.get(0).body);
 				containsMonitored = new FindMonitoredInControlledFunct(asm).visit(fd.body);
 
