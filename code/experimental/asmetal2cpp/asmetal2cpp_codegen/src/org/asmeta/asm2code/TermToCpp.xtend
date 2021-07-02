@@ -105,14 +105,18 @@ class TermToCpp extends ReflectiveVisitor<String> {
 	}
 
 	def String visit(ConditionalTerm object) {
-		return '''
+		var StringBuffer sb = new StringBuffer
+		sb.append('''
 			/*conditionalTerm*/
-				(«visit(object.guard)»)
-				?
-					«visit(object.thenTerm)»
-				:
-					«visit(object.elseTerm)»
-		'''
+			(«visit(object.guard)»)
+			?
+				«visit(object.thenTerm)»
+			:''')
+			if (object.getElseTerm() !== null) 
+				sb.append(visit(object.elseTerm))
+			else
+				sb.append("UNDEF");
+		return sb.toString();				
 	}
 
 	def String visit(CaseTerm object) {

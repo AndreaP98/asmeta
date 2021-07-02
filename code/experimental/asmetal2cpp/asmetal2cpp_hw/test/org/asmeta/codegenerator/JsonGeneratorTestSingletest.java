@@ -49,5 +49,10 @@ public class JsonGeneratorTestSingletest extends HWIntegratorAbstractClass {
 		generateJsonConfiguration("D:\\AgHome\\progettidaSVNGIT\\mvm-asmeta\\VentilatoreASM\\Ventilatore000.asm",true);
 	}
 
+	@Test
+	public void testMVM2() throws Exception {
+		generateJsonConfiguration("..\\..\\..\\..\\..\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3.asm",true);
+	}
+	
 	
 }
