@@ -28,4 +28,14 @@ public class MVMGeneratorTest {
 		CarSystemGeneratorTest.test_ino(asmFilePath,jsonFilePath, destinationFolder);
 	}
 
+	@Test
+	public void MVM_ino_test2() throws IOException,Exception {
+		String destinationFolder = "..\\..\\..\\..\\..\\mvm-asmeta\\VentilatoreASM_NewTime\\";
+		String asmFilePath = destinationFolder + "Ventilatore3.asm";
+		String jsonFilePath = destinationFolder + "Ventilatore3.u2c";
+		CarSystemGeneratorTest.test_hw(asmFilePath,jsonFilePath, destinationFolder);
+		CarSystemGeneratorTest.test_ino(asmFilePath,jsonFilePath, destinationFolder);
+	}
+
+	
 }

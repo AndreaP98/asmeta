@@ -284,19 +284,23 @@ class JsonGenerator implements IGenerator {
 	def void getBooleanBindings(Asm model, List<Function> defList, List<ArduinoPin> pinList) {
 		for (Function def : defList) {
 			if (def.codomain instanceof BooleanDomain || (def.definition instanceof EnumTd && // def.definition.get
+			getEnumerativeDomainSize(model, def) == 2) || (def.codomain instanceof EnumTd && 
 			getEnumerativeDomainSize(model, def) == 2)) {
 				var foundBinding = false
 				var Binding newbinding = new Binding
 				newbinding.function = def.name
+				if (def instanceof MonitoredFunction)
+					newbinding.mode = "DIGITALIN"
+				else
+					newbinding.mode = "DIGITALOUT"
 				for (var i = 0; i < pinList.size && (!foundBinding); i++) {
 					if (pinList.get(i).supportFeature(ArduinoPinFeature.DIGITAL)) {
-						newbinding.mode = "DIGITAL"
 						newbinding.pin = pinList.get(i).id.name
 						pinList.remove(i)
-						config.bindings.add(newbinding)
 						foundBinding = true
 					}
 				}
+				config.bindings.add(newbinding)
 			}
 		}
 	}

@@ -26,8 +26,10 @@ public class Binding {
 			return false;
 		else {
 			switch (ConfigurationMode.fromString(mode)) {
-			case DIGITAL:
-			case DIGITALINVERTED:
+			case DIGITALIN:
+			case DIGITALOUT:
+			case DIGITALINVERTEDIN:
+			case DIGITALINVERTEDOUT:
 			case ANALOGLINEARIN:
 			case ANALOGLINEAROUT:
 			case PWM:

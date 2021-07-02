@@ -68,9 +68,9 @@ class OutputFunctionCreator {
 			if (func.size() > 0) { // PWM and ANALOGLINEAROUT are only for output
 
 				switch (binding.configMode) {
-					case DIGITAL:
+					case DIGITALOUT:
 						outputFunction += getDigitalBinding(model, binding)
-					case DIGITALINVERTED:
+					case DIGITALINVERTEDOUT:
 						outputFunction += getInvertedDigitalBinding(model, binding)
 					case ANALOGLINEAROUT:
 						outputFunction += getAnalogLinearBinding(model, binding)
@@ -82,6 +82,8 @@ class OutputFunctionCreator {
 						outputFunction += ""
 					case SWITCH:
 						outputFunction += getEnumSwitchBinding(model, binding, func.get(0))
+					default:
+						throw new RuntimeException("Unsopported Type" + binding.configMode)
 				}
 			}
 		}

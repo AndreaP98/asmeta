@@ -187,10 +187,10 @@ public class ArduinoBoard {
 	public ArduinoPinFeature getCorrespondingFeatureForMode(ConfigurationMode mode) {
 		switch (mode) {
 
-		case DIGITAL:
-			return ArduinoPinFeature.DIGITAL;
-
-		case DIGITALINVERTED:
+		case DIGITALIN:
+		case DIGITALOUT: 
+		case DIGITALINVERTEDIN: 
+		case DIGITALINVERTEDOUT:
 			return ArduinoPinFeature.DIGITAL;
 
 		case ANALOGLINEARIN:

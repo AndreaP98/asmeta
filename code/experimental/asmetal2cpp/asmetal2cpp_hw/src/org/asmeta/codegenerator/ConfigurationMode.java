@@ -1,15 +1,13 @@
 package org.asmeta.codegenerator;
 
 import org.asmeta.codegenerator.arduino.ArduinoPinFeature;
+import org.eclipse.cdt.core.parser.ParseError;
 
 public enum ConfigurationMode {
-	DIGITAL, DIGITALINVERTED, ANALOGLINEARIN, ANALOGLINEAROUT, PWM, USERDEFINED, SWITCH;
+	DIGITALIN, DIGITALOUT, DIGITALINVERTEDIN, DIGITALINVERTEDOUT, ANALOGLINEARIN, ANALOGLINEAROUT, PWM, USERDEFINED, SWITCH;
 	
 	public static ConfigurationMode fromString(String configMode){
-		for(ConfigurationMode cm: ConfigurationMode.values()){
-			if(cm.name().equals(configMode))
-				return cm;
+		return valueOf(configMode);
 		}
-		throw new RuntimeException("Error:" + configMode + " unknown!");
 	}
-}
+

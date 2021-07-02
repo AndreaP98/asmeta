@@ -3,6 +3,7 @@ package org.asmeta.codegenerator.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.asmeta.codegenerator.ConfigurationMode;
 import org.asmeta.codegenerator.arduino.ArduinoBoard;
 import org.asmeta.codegenerator.arduino.ArduinoVersion;
 import org.asmeta.codegenerator.configuration.*;
@@ -60,10 +61,20 @@ public class HWConfiguration {
 		// Check whether a pin is used only once
 		if (bindings.size() > 1)
 			for (int i = 0; i < bindings.size() - 1; i++)
-				for (int j = i + 1; j < bindings.size(); j++)
-					if (bindings.get(i).getPin().equals(bindings.get(j).getPin())) {
-						System.out.println("Pin allocated twice " + bindings.get(i));
-						return false;}
+				for (int j = i + 1; j < bindings.size(); j++) {
+					// Ignore if both are digital in
+					Binding b_i = bindings.get(i);
+					Binding b_j = bindings.get(j);
+					if (b_i.getConfigMode() != ConfigurationMode.DIGITALIN
+							&& b_j.getConfigMode() != ConfigurationMode.DIGITALIN) {
+						if (b_i.getPin() == null || b_j.getPin() == null)
+							continue;
+						if (b_i.getPin().equals(b_j.getPin())) {
+							System.out.println("Pin allocated twice " + b_i);
+							return false;
+						}
+					}
+				}
 		return true;
 	}
 

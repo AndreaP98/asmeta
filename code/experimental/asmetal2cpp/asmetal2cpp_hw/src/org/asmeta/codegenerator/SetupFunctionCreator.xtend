@@ -32,9 +32,9 @@ class SetupFunctionCreator {
 				// PWM and ANALOGLINEAROUT are only for output
 				switch (binding.configMode) {
 					// TODO PROVARE CON ARDUINO QUALI SETUP SONO NECESSARI!!
-					case DIGITAL:
+					case DIGITALIN, case DIGITALOUT:
 						setupFunction += getDigitalSetup(asm, binding)
-					case DIGITALINVERTED:
+					case DIGITALINVERTEDIN, case DIGITALINVERTEDOUT:
 						setupFunction += getInvertedDigitalSetup(asm, binding)
 					case ANALOGLINEARIN:
 						setupFunction += getAnalogLinearInSetup(asm, binding)

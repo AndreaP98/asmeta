@@ -57,9 +57,11 @@ class InputFunctionCreator {
 					binding.function.length)))
 			]) { // PWM and ANALOGLINEAROUT are only for output
 				switch (binding.configMode) {
-					case DIGITAL:
+					case DIGITALIN,
+					case DIGITALOUT:
 						inputFunction += getDigitalBinding(model, binding)
-					case DIGITALINVERTED:
+					case DIGITALINVERTEDIN, 
+					case DIGITALINVERTEDOUT:
 						inputFunction += getInvertedDigitalBinding(model, binding)
 					case ANALOGLINEARIN:
 						inputFunction += getAnalogLinearBinding(model, binding)
