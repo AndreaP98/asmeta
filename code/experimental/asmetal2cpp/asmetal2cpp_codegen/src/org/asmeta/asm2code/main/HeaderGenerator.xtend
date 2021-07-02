@@ -91,6 +91,7 @@ class HeaderGenerator extends AsmToCGenerator {
 				
 				«platformDependentHeaders»
 				#define ANY String
+				#define UNDEF NULL
 				
 				
 				«includeLibrary(asm)»
