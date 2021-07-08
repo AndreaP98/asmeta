@@ -29,7 +29,7 @@ public class GeneratorCompilerTestMVM extends GeneratorCompilerTest2 {
 		Logger.getLogger(CppCompiler.class).setLevel(Level.ALL);
 		
 		//options.compilerType = CompilerType.DesktopCompiler;
-		options.compilerType = CompilerType.DesktopCompiler;
+		options.compilerType = CompilerType.ArduinoCompiler;
 		CppCompiler.setCompiler("g++");
 		String asmspec = "..\\..\\..\\..\\..\\mvm-asmeta\\VentilatoreASM_NewTime\\TimeLibrary.asm";
 		if (!test(asmspec,options).success)
@@ -43,7 +43,7 @@ public class GeneratorCompilerTestMVM extends GeneratorCompilerTest2 {
 		Logger.getLogger(CppCompiler.class).setLevel(Level.ALL);
 		
 		//options.compilerType = CompilerType.DesktopCompiler;
-		options.compilerType = CompilerType.DesktopCompiler;
+		options.compilerType = CompilerType.ArduinoCompiler;
 		CppCompiler.setCompiler("g++");
 		String asmspec = "..\\..\\..\\..\\..\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3.asm";
 		if (!test(asmspec,options).success)

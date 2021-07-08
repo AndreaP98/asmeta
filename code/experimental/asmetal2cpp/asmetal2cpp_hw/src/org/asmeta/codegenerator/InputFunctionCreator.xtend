@@ -94,6 +94,7 @@ class InputFunctionCreator {
 		 * We have to check if the function name contains the symbol "(" because, in that case, we have to use a MAP to
 		 * manage the value of the function
 		 */
+		
 		if (inverted)
 			if (!binding.function.contains("(")) {
 				return '''
@@ -121,17 +122,17 @@ class InputFunctionCreator {
 		if (inverted)
 			return '''
 				if(digitalRead(«Util.arduinoPinToString(binding.pin)») == HIGH)
-					«binding.function» = «enumDef.element.get(0)»;
+					«binding.function» = «model.name»namespace::«enumDef.element.get(0).getSymbol()»;
 				else
-					«binding.function» = «enumDef.element.get(1)»;
+					«binding.function» = «model.name»namespace::«enumDef.element.get(1).getSymbol()»;
 				
 			'''
 		else
 			return '''
 				if(digitalRead(«Util.arduinoPinToString(binding.pin)») == LOW)
-					«binding.function» = «enumDef.element.get(0)»;
+					«binding.function» = «model.name»namespace::«enumDef.element.get(0).getSymbol()»;
 				else
-					«binding.function» = «enumDef.element.get(1)»;
+					«binding.function» = «model.name»namespace::«enumDef.element.get(1).getSymbol()»;
 				
 			'''
 	}
