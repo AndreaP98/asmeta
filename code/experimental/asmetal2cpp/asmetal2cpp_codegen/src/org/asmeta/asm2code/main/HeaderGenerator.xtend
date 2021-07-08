@@ -48,8 +48,12 @@ class HeaderGenerator extends AsmToCGenerator {
 				'''
 					#define ARDUINOCOMPILER
 					#include <Arduino.h>
-					// The following two libs have to be installed into your Arduino Sketchbook
+					// The following 4 libs have to be installed into your Arduino Sketchbook or commented if not used
 					#include <ArduinoSTL.h>
+					#include <LiquidCrystal_I2C.h>
+					#include <DS3231.h>
+					//Andrea Belotti
+					#include <AsyncDelay.h>
 					// #include <boost_1_51_0.h>
 					#include <string.h>				
 					#include <iostream> 
@@ -57,12 +61,8 @@ class HeaderGenerator extends AsmToCGenerator {
 					#include <set>
 					#include <map>
 					#include <list>
-					//Andrea Belotti
-					#include <AsyncDelay>
-					#include <boost/tuple/tuple.hpp>
 					#include <LiquidCrystal.h>
-					#include <LiquidCrystal_I2C.h>
-					#include <DS3231.h>
+					//#include <boost/tuple/tuple.hpp>
 					using namespace std;
 					/*Arduino.h uses WString instead... */
 				'''
