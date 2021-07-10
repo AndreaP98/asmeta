@@ -140,15 +140,15 @@ class OutputFunctionCreator {
 		 */
 		if (inverted)
 			return '''
-				if(«binding.function»)
+				if(«binding.function»[1])
 					digitalWrite(«Util.arduinoPinToString(binding.pin)», LOW);
 				else
 					digitalWrite(«Util.arduinoPinToString(binding.pin)», HIGH);
 					
 			'''
-		else
+		else //controllo
 			return '''
-				if(«binding.function»)
+				if(«binding.function»[1])
 					digitalWrite(«Util.arduinoPinToString(binding.pin)», HIGH);
 				else
 					digitalWrite(«Util.arduinoPinToString(binding.pin)», LOW);
@@ -166,7 +166,7 @@ class OutputFunctionCreator {
 				return '''
 					if («binding.function»[0] != «binding.function»[1])
 					{
-						if(«binding.function» == «(enumDef.eContents.get(0) as EnumElement).symbol»)
+						if(«binding.function»[1] == «(enumDef.eContents.get(0) as EnumElement).symbol»)
 							digitalWrite(«Util.arduinoPinToString(binding.pin)», HIGH);
 						else
 							digitalWrite(«Util.arduinoPinToString(binding.pin)», LOW);
@@ -187,11 +187,11 @@ class OutputFunctionCreator {
 						
 				'''
 			}
-		else if (!binding.function.contains("(")) {
+		else if (!binding.function.contains("(")) { //controllo?
 			return '''
 				if («binding.function»[0] != «binding.function»[1])
 				{
-					if(«binding.function» == «(enumDef.eContents.get(0) as EnumElement).symbol»)
+					if(«binding.function»[1] == «(enumDef.eContents.get(0) as EnumElement).symbol»)
 						digitalWrite(«Util.arduinoPinToString(binding.pin)», LOW);
 					else
 						digitalWrite(«Util.arduinoPinToString(binding.pin)», HIGH);

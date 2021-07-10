@@ -73,11 +73,17 @@ class HWIntegrationGenerator implements IGenerator {
 
 	def String compileCollection(AsmCollection asmCol){
 		getInputOutputFunction(asmCol)
-		return '''
+		var StringBuffer sb = new StringBuffer
+		
+		sb.append('''
 			#include "«asmCol.main.name».h"
-			
-			«externalLCD»
-			
+			«externalLCD»''')
+		if(asmCol.main.name.contains("entilatore")) {
+			sb.append('''
+				long startTime = millis();
+			''')
+			}
+		sb.append('''
 			void «asmCol.main.name»::getInputs(){
 				«inputResult»
 			}
@@ -85,8 +91,10 @@ class HWIntegrationGenerator implements IGenerator {
 			void «asmCol.main.name»::setOutputs(){
 				«outputResult»
 			}
-			
-		'''
+		''')
+		
+		return sb.toString();
+		
 	}
 	
 	def getInputOutputFunction(AsmCollection asmCol){

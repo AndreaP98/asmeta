@@ -106,6 +106,7 @@ class TermToCpp extends ReflectiveVisitor<String> {
 
 	def String visit(ConditionalTerm object) {
 		var StringBuffer sb = new StringBuffer
+		
 		sb.append('''
 			/*conditionalTerm*/
 			(«visit(object.guard)»)

@@ -36,6 +36,8 @@ class InputFunctionCreator {
 
 	def String getInputFunction(Asm model) {
 		var String inputFunction = ""
+		if (model.name.contains("entilatore"))
+			inputFunction += getMillisIntro();
 		// Check whether all functions are defined in the spec
 		for (Binding binding : config.bindings) {
 			var functionDefinition = model.headerSection.signature.function.filter [ x |
@@ -344,4 +346,17 @@ class InputFunctionCreator {
 			//
 		'''
 	}
+	
+	def String getMillisIntro(){
+		return '''
+			long now = millis();				
+			long diff = now - startTime;
+			mCurrTimeMillisecs = diff;
+			mCurrTimeSecs = diff / 1000;
+			mCurrTimeMins = diff / 60000;
+			mCurrTimeHours = diff / 3600000;
+		'''
+	}
+	
+	
 }
