@@ -62,4 +62,30 @@ public class GeneratorCompilerTestMVM extends GeneratorCompilerTest2 {
 		if (!test(asmspec,options).success)
 			fail();
 	}
+	
+	@Test
+	public void testMVMAppFM() throws IOException, Exception {
+		TranslatorOptions options= new TranslatorOptions(false, true, true, true);
+		Logger.getLogger(CppCompiler.class).setLevel(Level.ALL);
+		
+		//options.compilerType = CompilerType.DesktopCompiler;
+		options.compilerType = CompilerType.ArduinoCompiler;
+		CppCompiler.setCompiler("g++");
+		String asmspec = "..\\..\\..\\..\\..\\mvm-asmeta\\asm_models\\MVM APPFM\\Arduino\\MVMcontroller04SingleButton.asm";
+		if (!test(asmspec,options).success)
+			fail();
+	}
+	
+	@Test
+	public void testTimerAppFM() throws IOException, Exception {
+		TranslatorOptions options= new TranslatorOptions(false, true, true, true);
+		Logger.getLogger(CppCompiler.class).setLevel(Level.ALL);
+		
+		//options.compilerType = CompilerType.DesktopCompiler;
+		options.compilerType = CompilerType.ArduinoCompiler;
+		CppCompiler.setCompiler("g++");
+		String asmspec = "..\\..\\..\\..\\..\\mvm-asmeta\\asm_models\\MVM APPFM\\Arduino\\TimeLibrary.asm";
+		if (!test(asmspec,options).success)
+			fail();
+	}
 }

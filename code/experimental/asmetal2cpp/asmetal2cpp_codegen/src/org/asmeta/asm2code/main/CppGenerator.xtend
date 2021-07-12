@@ -175,7 +175,10 @@ class CppGenerator extends AsmToCGenerator {
 		for (dd : asm.headerSection.signature.domain) {
 			if (dd instanceof AbstractTd) {
 				var domain = new DomainToH(asm).visit(dd)
-				sb.append(options.stdNamespacePrefix + "set< " + domain + "*>" + domain + "::elems;\n")
+				if (options.useVectorsForStaticElems)
+					sb.append(options.stdNamespacePrefix + "vector< " + domain + "*>" + domain + "::elems;\n")
+				else
+					sb.append(options.stdNamespacePrefix + "set< " + domain + "*>" + domain + "::elems;\n")
 			}
 		}
 		for (fd : asm.headerSection.signature.function) {

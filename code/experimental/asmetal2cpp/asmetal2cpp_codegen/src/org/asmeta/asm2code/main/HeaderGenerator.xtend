@@ -235,8 +235,15 @@ class HeaderGenerator extends AsmToCGenerator {
 	def defineElems(AbstractTd td) {
 		var sb = new StringBuffer;
 		sb.append("public:\n")
-		sb.append("static " + options.stdNamespacePrefix + "set<" + td.name + "*> elems;\n")
-		sb.append(td.name + "(){elems.insert(this);}\n")
+		
+		if (options.useVectorsForStaticElems) {
+			sb.append("static " + options.stdNamespacePrefix + "vector<" + td.name + "*> elems;\n")
+			sb.append(td.name + "(){elems.push_back(this);}\n")
+		}
+		else {
+			sb.append("static " + options.stdNamespacePrefix + "set<" + td.name + "*> elems;\n")
+			sb.append(td.name + "(){elems.insert(this);}\n")
+		}
 		return sb.toString
 	}
 

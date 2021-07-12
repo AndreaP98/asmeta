@@ -22,7 +22,6 @@ import asmeta.definitions.domains.UndefDomain
 import asmeta.structure.Asm
 import asmeta.terms.basicterms.FunctionTerm
 import org.asmeta.parser.util.ReflectiveVisitor
-import asmeta.definitions.domains.LongDomain
 
 class ToString extends ReflectiveVisitor<String> {
 
@@ -63,10 +62,6 @@ class ToString extends ReflectiveVisitor<String> {
 			return "long"
 		else
 			return "int"
-	}
-	
-	def String visit(LongDomain domain) {
-		return "long"
 	}
 	
 	def String visit(NaturalDomain domain) {
