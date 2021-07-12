@@ -50,10 +50,10 @@ class HeaderGenerator extends AsmToCGenerator {
 					#include <Arduino.h>
 					// The following 4 libs have to be installed into your Arduino Sketchbook or commented if not used
 					#include <ArduinoSTL.h>
-					#include <LiquidCrystal_I2C.h>
-					#include <DS3231.h>
+					// #include <LiquidCrystal_I2C.h>
+					// #include <DS3231.h>
 					//Andrea Belotti
-					#include <AsyncDelay.h>
+					// #include <AsyncDelay.h>
 					// #include <boost_1_51_0.h>
 					#include <string.h>				
 					#include <iostream> 
@@ -61,7 +61,7 @@ class HeaderGenerator extends AsmToCGenerator {
 					#include <set>
 					#include <map>
 					#include <list>
-					#include <LiquidCrystal.h>
+					// #include <LiquidCrystal.h>
 					//#include <boost/tuple/tuple.hpp>
 					using namespace std;
 					/*Arduino.h uses WString instead... */
@@ -101,13 +101,13 @@ class HeaderGenerator extends AsmToCGenerator {
 				
 			/* DOMAIN DEFINITIONS */
 			namespace «asmName»namespace{
-				«domainSignature(asm)» //devo togliere questo in Timer perché non serve
+				«domainSignature(asm)» 
 				}
 			
 				
 				using namespace «asmName»namespace;
 				
-				«abstractClassDef(asm)» //devo togliere questo in Timer perché non serve
+				«abstractClassDef(asm)» 
 				
 				class «asmName» «addExtension(asm)»{
 				  

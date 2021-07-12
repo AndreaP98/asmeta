@@ -24,6 +24,7 @@ import org.asmeta.flattener.rule.ChooseRuleFlattener
 import asmeta.definitions.domains.impl.RealDomainImpl
 import asmeta.definitions.domains.impl.ConcreteDomainImpl
 import asmeta.definitions.domains.impl.EnumTdImpl
+import org.asmeta.asm2code.main.TranslatorOptions
 
 /**
  * Generate the code for the setInputFunction. For each monitored function generate the equivalent code to acquire the input.
@@ -34,9 +35,9 @@ class InputFunctionCreator {
 		this.config = config
 	}
 
-	def String getInputFunction(Asm model) {
+	def String getInputFunction(Asm model, TranslatorOptions options) {
 		var String inputFunction = ""
-		if (model.name.contains("entilatore"))
+		if (options.useMillis)
 			inputFunction += getMillisIntro();
 		// Check whether all functions are defined in the spec
 		for (Binding binding : config.bindings) {

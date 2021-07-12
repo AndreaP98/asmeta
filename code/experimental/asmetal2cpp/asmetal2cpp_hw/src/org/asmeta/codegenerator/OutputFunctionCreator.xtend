@@ -146,7 +146,7 @@ class OutputFunctionCreator {
 					digitalWrite(«Util.arduinoPinToString(binding.pin)», HIGH);
 					
 			'''
-		else //controllo
+		else 
 			return '''
 				if(«binding.function»[1])
 					digitalWrite(«Util.arduinoPinToString(binding.pin)», HIGH);

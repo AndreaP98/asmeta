@@ -30,7 +30,8 @@ class HWIntegrationGenerator implements IGenerator {
 	TranslatorOptions options
 
 	new(HWConfiguration config) {
-		this(config, null)
+		this(config, new TranslatorOptions(true, true, true, true))
+		
 	}
 
 	new(HWConfiguration config, TranslatorOptions options) {
@@ -62,7 +63,7 @@ class HWIntegrationGenerator implements IGenerator {
 			«externalLCD»
 			
 			void «asm.name»::getInputs(){
-				«input.getInputFunction(asm)»
+				«input.getInputFunction(asm, options)»
 			}
 								
 			void «asm.name»::setOutputs(){
@@ -78,7 +79,7 @@ class HWIntegrationGenerator implements IGenerator {
 		sb.append('''
 			#include "«asmCol.main.name».h"
 			«externalLCD»''')
-		if(asmCol.main.name.contains("entilatore")) {
+		if(options.useMillis) {
 			sb.append('''
 				long startTime = millis();
 			''')
@@ -100,11 +101,11 @@ class HWIntegrationGenerator implements IGenerator {
 	def getInputOutputFunction(AsmCollection asmCol){
 		var String ir = ""
 		var String or = ""
-		inputResult += input.getInputFunction(asmCol.main)
+		inputResult += input.getInputFunction(asmCol.main, options)
 		outputResult += output.getOutputFunction(asmCol.main)
 		for(a : asmCol){
 			if(!a.name.contains("StandardLibrary")){
-			ir = input.getInputFunction(a)
+			ir = input.getInputFunction(a, options)
 			if(!inputResult.contains(ir)) inputResult += ir
 			or = output.getOutputFunction(a)
 			if(!outputResult.contains(or)) outputResult += or

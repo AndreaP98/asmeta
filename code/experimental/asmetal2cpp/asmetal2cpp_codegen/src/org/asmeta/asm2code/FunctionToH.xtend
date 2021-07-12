@@ -95,7 +95,7 @@ class FunctionToH extends ReflectiveVisitor<String> {
 		if (domain instanceof StructuredTd || domain instanceof StructuredTdImpl)
 			sb.append('''«new DomainToH(res,pointer).visit(domain)»''')
 		else 
-			sb.append('''«new ToString(res,pointer).visit(domain)»''')
+			sb.append('''«new ToString(res,pointer).visit(domain)»''') // qui
 		return sb.toString
 	}
 
@@ -161,11 +161,12 @@ class FunctionToH extends ReflectiveVisitor<String> {
 		var StringBuffer function = new StringBuffer
 
 		if (object.domain === null) { // 0-ary function
-		if (object.codomain instanceof AbstractTd)
-			function.append('''«returnDomain(object.codomain,true)» «object.name»;''')
+			if (object.codomain instanceof AbstractTd)
+				function.append('''«returnDomain(object.codomain,true)» «object.name»;''')
 			else
-			function.append('''«returnDomain(object.codomain,false)» «object.name»;''')
-		} else {
+				function.append('''«returnDomain(object.codomain,false)» «object.name»;''')
+			} 
+		else {
 			if (!(object.domain instanceof ConcreteDomain) || this.options.useMaps)
 			{
 				function.

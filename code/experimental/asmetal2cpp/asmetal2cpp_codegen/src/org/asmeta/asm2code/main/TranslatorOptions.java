@@ -35,9 +35,12 @@ public class TranslatorOptions {
 	// use maps or multi-dimensional arrays
 	public boolean useMaps;
 	
+	//use millis() for time
+	public boolean useMillis;
+	
 	/** default constructor */
 	TranslatorOptions(){
-		this(true,false,false,false);
+		this(true, false, false, false, true, true, true, true);
 	}
 	
 	/**
@@ -49,7 +52,7 @@ public class TranslatorOptions {
 	 * @param arduinoCompiler the arduino compiler
 	 */
 	public TranslatorOptions(boolean formatter, boolean shuffleRandom, boolean optmizeSeqRule, boolean arduinoCompiler){
-		this(formatter, shuffleRandom, optmizeSeqRule, arduinoCompiler, true, true, true);
+		this(formatter, shuffleRandom, optmizeSeqRule, arduinoCompiler, true, true, true, true);
 	}
 	
 	/**
@@ -62,7 +65,7 @@ public class TranslatorOptions {
 	 * @param initWithInsert initialization type
 	 */
 	public TranslatorOptions(boolean formatter, boolean shuffleRandom, boolean optmizeSeqRule, boolean arduinoCompiler, boolean initWithInsert
-			, boolean useCasesForSwitch, boolean useMaps){
+			, boolean useCasesForSwitch, boolean useMaps, boolean useMillis){
 		if (arduinoCompiler) 
 			compilerType = CompilerType.ArduinoCompiler;
 		else
@@ -77,6 +80,7 @@ public class TranslatorOptions {
 		this.initMapsWithInsert = initWithInsert;
 		this.useCasesForSwitch = useCasesForSwitch;
 		this.useMaps = useMaps;
+		this.useMillis = useMillis;
 	}
 
 
