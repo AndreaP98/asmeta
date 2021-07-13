@@ -58,4 +58,9 @@ public class JsonGeneratorTestSingletest extends HWIntegratorAbstractClass {
 	public void testMVMKP() throws Exception {
 		generateJsonConfiguration("..\\..\\..\\..\\..\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3KP.asm",true);
 	}
+	
+	@Test
+	public void testMVMAppFM() throws Exception {
+		generateJsonConfiguration("..\\..\\..\\..\\..\\mvm-asmeta\\asm_models\\MVM APPFM\\Arduino\\MVMcontroller04SingleButton.asm",true);
+	}
 }

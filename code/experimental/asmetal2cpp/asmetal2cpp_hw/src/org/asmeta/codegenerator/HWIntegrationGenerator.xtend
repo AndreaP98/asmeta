@@ -60,6 +60,8 @@ class HWIntegrationGenerator implements IGenerator {
 		return '''
 			#include "«asm.name».h"
 			
+			bool firstStep = true;
+			
 			«externalLCD»
 			
 			void «asm.name»::getInputs(){
@@ -68,6 +70,7 @@ class HWIntegrationGenerator implements IGenerator {
 								
 			void «asm.name»::setOutputs(){
 				«output.getOutputFunction(asm)»
+				if (firstStep) firstStep = false;
 			}
 		'''
 	}
@@ -78,7 +81,9 @@ class HWIntegrationGenerator implements IGenerator {
 		
 		sb.append('''
 			#include "«asmCol.main.name».h"
-			«externalLCD»''')
+			bool firstStep = true;
+			«externalLCD»
+			''')
 		if(options.useMillis) {
 			sb.append('''
 				long startTime = millis();
@@ -91,6 +96,7 @@ class HWIntegrationGenerator implements IGenerator {
 								
 			void «asmCol.main.name»::setOutputs(){
 				«outputResult»
+				if (firstStep) firstStep = false;
 			}
 		''')
 		

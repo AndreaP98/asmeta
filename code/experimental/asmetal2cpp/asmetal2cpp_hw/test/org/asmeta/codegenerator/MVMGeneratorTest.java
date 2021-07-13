@@ -46,5 +46,12 @@ public class MVMGeneratorTest {
 		CarSystemGeneratorTest.test_ino(asmFilePath,jsonFilePath, destinationFolder);
 	}
 	
-	
+	@Test
+	public void MVM_SingleButton_ino_test2() throws IOException,Exception {
+		String destinationFolder = "..\\..\\..\\..\\..\\mvm-asmeta\\asm_models\\MVM APPFM\\Arduino\\";
+		String asmFilePath = destinationFolder + "MVMcontroller04SingleButton.asm";
+		String jsonFilePath = destinationFolder + "MVMcontroller04SingleButton.u2c";
+		CarSystemGeneratorTest.test_hw(asmFilePath,jsonFilePath, destinationFolder);
+		CarSystemGeneratorTest.test_ino(asmFilePath,jsonFilePath, destinationFolder);
+	}
 }
