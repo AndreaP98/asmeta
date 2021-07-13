@@ -33,6 +33,8 @@ import java.io.File
 import org.asmeta.parser.ASMParser
 import asmeta.AsmCollection
 import asmeta.definitions.DerivedFunction
+import org.asmeta.codegenerator.configuration.LCD
+import org.asmeta.asm2code.main.TranslatorOptions
 
 class JsonGenerator implements IGenerator {
 	public static String Ext = ".a2c"
@@ -41,12 +43,15 @@ class JsonGenerator implements IGenerator {
 	boolean derivedFunction
 	public String folderPath
 	public String previousPath
-	public List<ArduinoPin> available 
+	public List<ArduinoPin> available
+
 
 	new(ArduinoVersion av) {
 		config = new HWConfiguration
 		config.arduinoVersion = av.name
 		config.stepTime = 0
+		/*TODO options */
+		config.lcd = new LCD
 		arduino = new ArduinoBoard(av)
 		available = new ArrayList<ArduinoPin>(arduino.pins)
 		derivedFunction = false
@@ -356,12 +361,29 @@ class JsonGenerator implements IGenerator {
 		return -1
 	}
 	
+	def void configLCD(){/* se non sono nei pin esistenti non esistono */
+		config.lcd.setRs("null");
+		config.lcd.setRw("null");
+		config.lcd.setEnable("null");
+		config.lcd.setPin0("null");
+		config.lcd.setPin1("null");
+		config.lcd.setPin2("null");
+		config.lcd.setPin3("null");
+		config.lcd.setPin4("null");
+		config.lcd.setPin5("null");
+		config.lcd.setPin6("null");
+		config.lcd.setPin7("null");
+		config.lcd.setIsi2c(false);
+	}
+	
 	def String compile(AsmCollection asmCol){
 		config.clearBindings();
 		for(asm : asmCol){
 			if(!asm.name.contains("StandardLibrary"))
 			allocatePins(asm)
 		}
+		/*IF? options */
+		configLCD()
 		var Gson gson = new GsonBuilder().setPrettyPrinting().create()
 		return gson.toJson(config)
 	}

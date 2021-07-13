@@ -69,8 +69,22 @@ class InoGenerator implements IGenerator {
 			else
 			{
 				sb.append(System.lineSeparator)
-				sb.append('''LiquidCrystal «config.lcd.name»(«config.lcd.pin0», «config.lcd.pin1», «config.lcd.pin2»,
-											«config.lcd.pin3», «config.lcd.pin4», «config.lcd.pin5»);''')
+				if (config.lcd.rw == null)
+					if (config.lcd.pin0 == null && config.lcd.pin1== null && config.lcd.pin2 == null && config.lcd.pin3 == null)
+						sb.append('''LiquidCrystal «config.lcd.name»(«config.lcd.rs», «config.lcd.enable», «config.lcd.pin4», «config.lcd.pin5», «config.lcd.pin6»,
+													«config.lcd.pin7»);''')
+					else
+						sb.append('''LiquidCrystal «config.lcd.name»(«config.lcd.rs», «config.lcd.enable», «config.lcd.pin0», «config.lcd.pin1», «config.lcd.pin2»,
+													«config.lcd.pin3», «config.lcd.pin4», «config.lcd.pin5», «config.lcd.pin6», «config.lcd.pin7»);''')
+					
+				else
+					if (config.lcd.pin0 == null && config.lcd.pin1== null && config.lcd.pin2 == null && config.lcd.pin3 == null)
+						sb.append('''LiquidCrystal «config.lcd.name»(«config.lcd.rs», «config.lcd.rw», «config.lcd.enable», «config.lcd.pin4», «config.lcd.pin5», 
+														«config.lcd.pin6», «config.lcd.pin7»);''')
+					else
+						sb.append('''LiquidCrystal «config.lcd.name»(«config.lcd.rs», «config.lcd.rw», «config.lcd.enable», «config.lcd.pin0», «config.lcd.pin1», «config.lcd.pin2»,
+													«config.lcd.pin3», «config.lcd.pin4», «config.lcd.pin5», «config.lcd.pin6», «config.lcd.pin7»);''')
+												
 				sb.append(System.lineSeparator)
 				sb.append(System.lineSeparator)
 			}

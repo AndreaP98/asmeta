@@ -51,9 +51,10 @@ class SetupFunctionCreator {
 		}
 		return '''
 			void setup(){
+				«getLCDSetup»
 				«setupFunction»
 				«getRandomSeed(asm)»
-				«getLCDSetup»
+				
 			}
 		'''
 	}

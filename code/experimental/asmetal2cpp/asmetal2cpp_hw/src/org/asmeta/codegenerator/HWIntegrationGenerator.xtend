@@ -82,9 +82,12 @@ class HWIntegrationGenerator implements IGenerator {
 		sb.append('''
 			#include "«asmCol.main.name».h"
 			bool firstStep = true;
-			«externalLCD»
 			''')
-		if(options.useMillis) {
+			
+		if (options.useLCD) /*TODO controlla options */
+			sb.append(''' «externalLCD» ''')
+			
+		if (options.useMillis) {
 			sb.append('''
 				long startTime = millis();
 			''')
