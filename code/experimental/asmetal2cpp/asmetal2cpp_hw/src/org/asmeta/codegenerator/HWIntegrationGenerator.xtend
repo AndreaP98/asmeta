@@ -83,8 +83,6 @@ class HWIntegrationGenerator implements IGenerator {
 			#include "«asmCol.main.name».h"
 			bool firstStep = true;
 			''')
-			
-		if (options.useLCD) /*TODO controlla options */
 			sb.append(''' «externalLCD» ''')
 			
 		if (options.useMillis) {

@@ -51,6 +51,10 @@ public abstract class HWIntegratorAbstractClass {
 	 * @throws Exception
 	 */
 	void generateJsonConfiguration(String uasmFilePath, boolean export) throws IOException, Exception {
+		generateJsonConfiguration(uasmFilePath,  export, false);
+	}
+	
+	void generateJsonConfiguration(String uasmFilePath, boolean export, boolean useLCD) throws IOException, Exception {
 		File uasmFile= new File(uasmFilePath);
 		
 		if(!uasmFile.exists())
@@ -61,7 +65,7 @@ public abstract class HWIntegratorAbstractClass {
 			//final Asm model = ASMParser.setUpReadAsm(uasmFile).getMain();
 			AsmCollection model = ASMParser.setUpReadAsm(uasmFile);
 			//Resource res = model.eResource();
-			JsonGenerator jsonGen = new JsonGenerator(ArduinoVersion.UNO);
+			JsonGenerator jsonGen = new JsonGenerator(ArduinoVersion.UNO, useLCD);
 			//jsonGen.getFolderPath(model,uasmFile.getPath());
 			jsonGen.getFolderPath(model.getMain(),uasmFile.getPath());
 			//System.out.println(jsonGen.compile(model,true));

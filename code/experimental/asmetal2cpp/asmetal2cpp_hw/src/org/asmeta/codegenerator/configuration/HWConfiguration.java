@@ -50,10 +50,15 @@ public class HWConfiguration {
 
 		for (Binding binding : bindings) {
 			// Check whether every binding have all the parameters
-			//System.out.println("bindings in HWConfiguration " + binding);
+			//System.out.println("bindings in HWConfiguration " + binding);			
 			if (!binding.isDataComplete()) {
 				System.out.println("Data not complete.");
 				return false;}
+			//controllo su lcd
+			if (binding.getConfigMode() == ConfigurationMode.LCDOUT && lcd == null) {
+				System.out.println("Data not complete, lcd not defined.");
+				return false;
+			}
 		}
 		// TODO Check whether a pin has assigned a supported binding (example A0
 		// with Analog is supported)

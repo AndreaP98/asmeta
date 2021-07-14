@@ -56,7 +56,7 @@ public class JsonGeneratorTestSingletest extends HWIntegratorAbstractClass {
 	
 	@Test
 	public void testMVMKP() throws Exception {
-		generateJsonConfiguration("..\\..\\..\\..\\..\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3KP.asm",true);
+		generateJsonConfiguration("..\\..\\..\\..\\..\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3KP.asm",true, true);
 	}
 	
 	@Test

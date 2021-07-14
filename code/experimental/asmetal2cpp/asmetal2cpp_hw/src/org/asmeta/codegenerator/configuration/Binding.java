@@ -36,7 +36,8 @@ public class Binding {
 			case SWITCH:
 				return (function != null && pin != null);
 			case USERDEFINED:
-				return (function != null);
+			case LCDOUT:
+				return (function != null);	
 			default:
 				throw new RuntimeException("Error: unknown binding mode'" + mode + "' found!");
 			}
