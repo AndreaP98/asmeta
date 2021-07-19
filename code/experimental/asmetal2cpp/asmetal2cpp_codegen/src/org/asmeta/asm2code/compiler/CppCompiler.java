@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.asmeta.simulator.Environment;
 
 /**
  * class where to put the C++ compiler functionalities
@@ -27,7 +28,7 @@ public class CppCompiler {
 	private static boolean USE_CPP_11 = false;
 
 	public static String extraOptionsWhenCompiling = "";
-
+	
 	private static String OS = System.getProperty("os.name").toLowerCase();
 
 	// set the compiler. If it cannot find the compiler, it will return false
