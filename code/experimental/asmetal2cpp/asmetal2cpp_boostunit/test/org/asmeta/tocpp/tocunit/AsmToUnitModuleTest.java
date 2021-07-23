@@ -84,7 +84,7 @@ public class AsmToUnitModuleTest {
 		//testSpec(UNITFM.CATCH2, "C:\\Users\\Belotti Andrea\\git\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3.asm",
 		//		SIMULATOR, "1", "5");
 		testSpec(UNITFM.CATCH2,
-		 "../../../../../mvm-asmeta/VentilatoreASM_NewTime/Ventilatore3.asm",SIMULATOR,"5","5");		
+		 "../../../../../mvm-asmeta/asm_models/MVM APPFM/MVMcontroller03.asm",SIMULATOR,"5","5");		
 	}
 
 	//Belotti Andrea Test creazione Timer
@@ -98,6 +98,12 @@ public class AsmToUnitModuleTest {
 	@Test
 	public void testGenerateCounter() throws Exception {
 		testSpec(UNITFM.BOOST, "examples/asmeta_examples/Counter.asm", SIMULATOR, "1", "5");
+	}
+	
+	@Test
+	public void testGenerateSimpleExample() throws Exception {
+		CppCompiler.setCompiler("g++");
+		testSpec(UNITFM.CATCH2, "examples/simple.asm", SIMULATOR, "1", "5");
 	}
 
 	@Test
