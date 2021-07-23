@@ -77,6 +77,19 @@ public class GeneratorCompilerTestMVM extends GeneratorCompilerTest2 {
 	}
 	
 	@Test
+	public void testMVMAppFM2() throws IOException, Exception {
+		TranslatorOptions options= new TranslatorOptions(false, true, true, true);
+		Logger.getLogger(CppCompiler.class).setLevel(Level.ALL);
+		
+		options.compilerType = CompilerType.DesktopCompiler;
+		//options.compilerType = CompilerType.ArduinoCompiler;
+		CppCompiler.setCompiler("g++");
+		String asmspec = "..\\..\\..\\..\\..\\mvm-asmeta\\asm_models\\MVM APPFM\\MVMcontroller03.asm";
+		if (!test(asmspec,options).success)
+			fail();
+	}
+	
+	@Test
 	public void testTimerAppFM() throws IOException, Exception {
 		TranslatorOptions options= new TranslatorOptions(false, true, true, true);
 		Logger.getLogger(CppCompiler.class).setLevel(Level.ALL);
@@ -85,6 +98,19 @@ public class GeneratorCompilerTestMVM extends GeneratorCompilerTest2 {
 		options.compilerType = CompilerType.ArduinoCompiler;
 		CppCompiler.setCompiler("g++");
 		String asmspec = "..\\..\\..\\..\\..\\mvm-asmeta\\asm_models\\MVM APPFM\\Arduino\\TimeLibrary.asm";
+		if (!test(asmspec,options).success)
+			fail();
+	}
+	
+	@Test
+	public void testTimerAppFM2() throws IOException, Exception {
+		TranslatorOptions options= new TranslatorOptions(false, true, true, true);
+		Logger.getLogger(CppCompiler.class).setLevel(Level.ALL);
+		
+		options.compilerType = CompilerType.DesktopCompiler;
+		//options.compilerType = CompilerType.ArduinoCompiler;
+		CppCompiler.setCompiler("g++");
+		String asmspec = "..\\..\\..\\..\\..\\mvm-asmeta\\asm_models\\MVM APPFM\\TimeLibrary.asm";
 		if (!test(asmspec,options).success)
 			fail();
 	}
