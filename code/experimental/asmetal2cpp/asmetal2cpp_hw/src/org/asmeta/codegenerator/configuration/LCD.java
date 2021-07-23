@@ -11,6 +11,12 @@ public class LCD {
 	private String name;
 	@SerializedName("function")
 	private String function;
+	@SerializedName("rs")
+	private String rs;
+	@SerializedName("rw")
+	private String rw;
+	@SerializedName("enable")
+	private String enable;
 	@SerializedName("pin0")
 	private String pin0;
 	@SerializedName("pin1")
@@ -23,6 +29,10 @@ public class LCD {
 	private String pin4;
 	@SerializedName("pin5")
 	private String pin5;
+	@SerializedName("pin6")
+	private String pin6;
+	@SerializedName("pin7")
+	private String pin7;
 	@SerializedName("numberofrows")
 	private int numberofrows;
 	@SerializedName("numberofcolumns")
@@ -32,6 +42,24 @@ public class LCD {
 	@SerializedName("address")
 	private String address;
 	
+	public ArduinoPinID getRs() {
+		return ArduinoPinID.fromString(rs);
+	}
+	public void setRs(String rs) {
+		this.rs = rs;
+	}
+	public ArduinoPinID getRw() {
+		return ArduinoPinID.fromString(rw);
+	}
+	public void setRw(String rw) {
+		this.rw = rw;
+	}
+	public ArduinoPinID getEnable() {
+		return ArduinoPinID.fromString(enable);
+	}
+	public void setEnable(String enable) {
+		this.enable = enable;
+	}
 	public ArduinoPinID getPin0() {
 		return ArduinoPinID.fromString(pin0);
 	}
@@ -67,6 +95,18 @@ public class LCD {
 	}
 	public void setPin5(String pin5) {
 		this.pin5 = pin5;
+	}
+	public ArduinoPinID getPin6() {
+		return ArduinoPinID.fromString(pin6);
+	}
+	public void setPin6(String pin6) {
+		this.pin6 = pin6;
+	}
+	public ArduinoPinID getPin7() {
+		return ArduinoPinID.fromString(pin7);
+	}
+	public void setPin7(String pin7) {
+		this.pin7 = pin7;
 	}
 	public int getNumberofrows() {
 		return numberofrows;

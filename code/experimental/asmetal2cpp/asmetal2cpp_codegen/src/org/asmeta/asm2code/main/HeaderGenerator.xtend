@@ -50,6 +50,7 @@ class HeaderGenerator extends AsmToCGenerator {
 					#include <Arduino.h>
 					// The following 4 libs have to be installed into your Arduino Sketchbook or commented if not used
 					#include <ArduinoSTL.h>
+					#include <LiquidCrystal.h>
 					// #include <LiquidCrystal_I2C.h>
 					// #include <DS3231.h>
 					//Andrea Belotti
@@ -61,7 +62,6 @@ class HeaderGenerator extends AsmToCGenerator {
 					#include <set>
 					#include <map>
 					#include <list>
-					// #include <LiquidCrystal.h>
 					//#include <boost/tuple/tuple.hpp>
 					using namespace std;
 					/*Arduino.h uses WString instead... */

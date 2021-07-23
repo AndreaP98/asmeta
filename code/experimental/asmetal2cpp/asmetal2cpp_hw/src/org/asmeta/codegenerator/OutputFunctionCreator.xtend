@@ -78,10 +78,11 @@ class OutputFunctionCreator {
 						outputFunction += getPWMBinding(model, binding)
 					case USERDEFINED:
 						outputFunction += getUserDefinedBinding(model, binding)
-					case ANALOGLINEARIN:
+					case ANALOGLINEARIN, 
+					case LCDOUT:
 						outputFunction += ""
 					case SWITCH:
-						outputFunction += getEnumSwitchBinding(model, binding, func.get(0))
+						outputFunction += getEnumSwitchBinding(model, binding, func.get(0))	
 					default:
 						throw new RuntimeException("Unsopported Type" + binding.configMode)
 				}
@@ -91,16 +92,23 @@ class OutputFunctionCreator {
 		// LCD
 		if (config.lcd !== null)
 		{
+			
+			// leggo gli lcd sia dal binding che dalle funzioni asmeta
 			var lcdFunc = model.headerSection.signature.function
 							.filter [ x | x instanceof OutFunction || x instanceof ControlledFunction || x instanceof DerivedFunction]
-							.filter [ x | x.name == config.lcd.function]
-			
-			if (lcdFunc.size() > 0)
+							.filter [ x | x.name == config.lcd.function || !config.bindings.filter[y | y.configMode == ConfigurationMode.LCDOUT && y.function == x.name].empty ]
+			if (lcdFunc.size > 0)
+				outputFunction += '''
+				«config.lcd.name».clear(); 
+				'''
+			// ciclo le funzioni all'interno della variabile lcdFunc, in cui ci sono solo le variabili che hanno mode LCDOUT
+			for (Function f : lcdFunc)
 			{
-				var f = lcdFunc.get(0)
 				
 				if (f.codomain instanceof EnumTdImpl)
 				{
+					// cambio il nome di lcd.function a seconda del nome della funzione perché nel metodo getEnumSwitchBinding vado a fare un controllo su di esso e senza farlo rimarrebbe null
+					config.lcd.function = f.name
 					outputFunction += getEnumSwitchBinding(model, null, f)
 				}
 				else
@@ -108,12 +116,12 @@ class OutputFunctionCreator {
 					outputFunction += '''
 						if («f.name»[0] != «f.name»[1])
 						{
-							«config.lcd.name».clear();
 							«config.lcd.name».print(«f.name»[1]);
 						}
 					'''
 				}
 			}
+			
 		}
 
 		/*if(outputFunction.length != 0) 
@@ -510,11 +518,6 @@ class OutputFunctionCreator {
 		return '''
 			if (firstStep || «func.name»[0]«variable» != «func.name»[1]«variable»)
 			{
-				«
-				if (config.lcd !== null && func.name == config.lcd.function) { // LCD
-					'''«config.lcd.name».clear();'''
-				}
-				»
 				«
 					if (useCasesForSwitch)
 					{

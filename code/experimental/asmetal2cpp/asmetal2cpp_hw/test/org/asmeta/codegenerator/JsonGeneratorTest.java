@@ -46,16 +46,16 @@ public class JsonGeneratorTest {
 
 	@Test
 	public void testAll() throws IOException, Exception {
-		test(fileToTest);
+		test(fileToTest, false);
 	}
 
-	static void test(String asmFilePath) throws IOException, Exception {
+	static void test(String asmFilePath, boolean useLCD) throws IOException, Exception {
 		File asmFile = new File(asmFilePath);
 		File jsonFile = new File(asmFile.getPath().replace(AsmToCGenerator.Ext, JsonGenerator.Ext));
 		assert asmFile.exists();
 		try {
 			Asm model = ASMParser.setUpReadAsm(asmFile).getMain();
-			JsonGenerator jsonGen = new JsonGenerator(ArduinoVersion.UNO);
+			JsonGenerator jsonGen = new JsonGenerator(ArduinoVersion.UNO, useLCD);
 			jsonGen.generate(model, jsonFile.getPath());
 			assertTrue(jsonFile.exists());
 		} catch (FileNotFoundException e) {

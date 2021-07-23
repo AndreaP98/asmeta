@@ -69,8 +69,26 @@ class InoGenerator implements IGenerator {
 			else
 			{
 				sb.append(System.lineSeparator)
-				sb.append('''LiquidCrystal «config.lcd.name»(«config.lcd.pin0», «config.lcd.pin1», «config.lcd.pin2»,
-											«config.lcd.pin3», «config.lcd.pin4», «config.lcd.pin5»);''')
+				
+				if (config.lcd.rw === null)
+					// a seconda dei pin utilizzati per la LiquidCrystal imposto il costruttore adatto, i pin totali possono essere 6 (o 7 con rw opzionale) 10 (o 11 con rw opzionale)
+					/*
+					 * rs: Register Select  indica il tipo di comando che inviamo
+					 * rw: indica all’lcd se deve scrivere o leggere – 0 scrivi 1 leggi
+					 * enable: per abilitare la scrittura nei registri
+					 * pin0-pin7: linee dei dati collegati ai pin dell'arduino
+					 */
+					if (config.lcd.pin0 === null && config.lcd.pin1=== null && config.lcd.pin2 === null && config.lcd.pin3 === null)
+						sb.append('''LiquidCrystal «config.lcd.name»(«Util.arduinoPinToString(config.lcd.rs)», «Util.arduinoPinToString(config.lcd.enable)», «Util.arduinoPinToString(config.lcd.pin4)», «Util.arduinoPinToString(config.lcd.pin5)», «Util.arduinoPinToString(config.lcd.pin6)», «Util.arduinoPinToString(config.lcd.pin7)»);''')
+					else
+						sb.append('''LiquidCrystal «config.lcd.name»(«Util.arduinoPinToString(config.lcd.rs)», «Util.arduinoPinToString(config.lcd.enable)», «Util.arduinoPinToString(config.lcd.pin0)», «Util.arduinoPinToString(config.lcd.pin1)», «Util.arduinoPinToString(config.lcd.pin2)», «Util.arduinoPinToString(config.lcd.pin3)», «Util.arduinoPinToString(config.lcd.pin4)», «Util.arduinoPinToString(config.lcd.pin5)», «Util.arduinoPinToString(config.lcd.pin6)», «Util.arduinoPinToString(config.lcd.pin7)»);''')
+					
+				else
+					if (config.lcd.pin0 === null && config.lcd.pin1=== null && config.lcd.pin2 === null && config.lcd.pin3 === null)
+						sb.append('''LiquidCrystal «config.lcd.name»(«Util.arduinoPinToString(config.lcd.rs)», «Util.arduinoPinToString(config.lcd.rw)», «Util.arduinoPinToString(config.lcd.enable)», «Util.arduinoPinToString(config.lcd.pin4)», «Util.arduinoPinToString(config.lcd.pin5)», «Util.arduinoPinToString(config.lcd.pin6)», «Util.arduinoPinToString(config.lcd.pin7)»);''')
+					else
+						sb.append('''LiquidCrystal «config.lcd.name»(«Util.arduinoPinToString(config.lcd.rs)», «Util.arduinoPinToString(config.lcd.rw)»,«Util.arduinoPinToString(config.lcd.enable)», «Util.arduinoPinToString(config.lcd.pin0)», «Util.arduinoPinToString(config.lcd.pin1)», «Util.arduinoPinToString(config.lcd.pin2)», «Util.arduinoPinToString(config.lcd.pin3)», «Util.arduinoPinToString(config.lcd.pin4)», «Util.arduinoPinToString(config.lcd.pin5)», «Util.arduinoPinToString(config.lcd.pin6)», «Util.arduinoPinToString(config.lcd.pin7)»);''')
+												
 				sb.append(System.lineSeparator)
 				sb.append(System.lineSeparator)
 			}
