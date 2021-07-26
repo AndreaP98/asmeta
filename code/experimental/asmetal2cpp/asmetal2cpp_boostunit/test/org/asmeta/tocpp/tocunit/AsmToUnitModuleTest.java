@@ -69,22 +69,43 @@ public class AsmToUnitModuleTest {
 		Environment.currentTimeUnit = ChronoUnit.SECONDS;
 		Environment.auto_increment_delta = 1;
 		CppCompiler.setCompiler("g++");
-		testSpec(UNITFM.CATCH2, "../../../../../mvm-asmeta/VentilatoreASM_NewTime/Ventilatore3.asm",SIMULATOR,"200","100");
+
+		// testSpec(UNITFM.BOOST,
+		// "D:\\AgHome\\progettidaSVNGIT\\mvm-asmeta\\VentilatoreASM\\Ventilatore000.asm",SIMULATOR,"1",
+		// "5");
+		//testSpec(UNITFM.CATCH2, "D:\\AgHome\\progettidaSVNGIT\\mvm-asmeta\\VentilatoreASM\\Ventilatore000.asm",
+		//		SIMULATOR, "1", "5");
+		//testSpec(UNITFM.CATCH2, "D:\\ProgettoTesi\\FileTesi\\mvm-asmeta-master\\VentilatoreASM\\Ventilatore00.asm",
+		//		SIMULATOR, "1", "5");
+		//testSpec(UNITFM.CATCH2, "D:\\ProgettoTesi\\FileTesi\\mvm-asmeta-master\\VentilatoreASM\\Ventilatore0.asm",
+		//		SIMULATOR, "1", "5");
+		//testSpec(UNITFM.CATCH2, "D:\\ProgettoTesi\\FileTesi\\mvm-asmeta-master\\VentilatoreASM\\Ventilatore1.asm",
+		//		SIMULATOR, "1", "5");
+		//testSpec(UNITFM.CATCH2, "D:\\ProgettoTesi\\FileTesi\\mvm-asmeta-master\\VentilatoreASM\\Ventilatore2.asm",
+		//		SIMULATOR, "1", "5");
+		//testSpec(UNITFM.CATCH2, "C:\\Users\\Belotti Andrea\\git\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3.asm",
+		//		SIMULATOR, "1", "5");
+		testSpec(UNITFM.CATCH2,
+		 "../../../../../mvm-asmeta/asm_models/MVM APPFM/MVMcontroller03.asm",SIMULATOR,"5","5");
 	}
-	
+
+	//Belotti Andrea Test creazione Timer
 	@Test
-	public void testBombarda() throws Exception {
+	public void testGenerateTimer() throws Exception {
 		Logger.getLogger(CppCompiler.class).setLevel(Level.ALL);
-		Environment.timeMngt = TimeMngt.auto_increment;
-		Environment.currentTimeUnit = ChronoUnit.SECONDS;
-		Environment.auto_increment_delta = 1;
-		CppCompiler.setCompiler("g++");
-		testSpec(UNITFM.CATCH2, "../../../../../mvm-asmeta/BombardaTest/MVMcontroller03.asm",SIMULATOR,"50","50");	
+		testSpec(UNITFM.CATCH2, "C:\\Users\\Belotti Andrea\\git\\asmeta\\asm_examples\\STDL\\TimeLibrary.asm",
+				SIMULATOR, "1", "2");
 	}
-	
+
 	@Test
 	public void testGenerateCounter() throws Exception {
 		testSpec(UNITFM.BOOST, "examples/asmeta_examples/Counter.asm", SIMULATOR, "1", "5");
+	}
+
+	@Test
+	public void testGenerateSimpleExample() throws Exception {
+		CppCompiler.setCompiler("g++");
+		testSpec(UNITFM.CATCH2, "examples/simple.asm", SIMULATOR, "1", "5");
 	}
 
 	@Test
@@ -205,7 +226,7 @@ public class AsmToUnitModuleTest {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param unitfm   TODO
 	 * @param specpath
 	 * @param tgs
@@ -232,18 +253,18 @@ public class AsmToUnitModuleTest {
 
 		//controlla librerie in asm e le salvo qui
 		ArrayList<Asm> libraries = findNonStandardLibrary(asm);
-		
+
 		// Header
 		HeaderGenerator hgen = new HeaderGenerator(userOptions);
 		String specname = asm.getMain().getName();
-		
+
 		hgen.generate(asm.getMain(), destDir.getPath() + File.separator + specname + ".h");
 
 		for (Asm a : libraries) {
 			String libName = a.getName();
 			hgen.generate(a, destDir.getPath() + File.separator + libName + ".h");
 		}
-		
+
 		// build the generator
 		AsmTestGenerator tg = tgs == SIMULATOR
 				? new AsmTestGeneratorBySimulation(asm, Integer.parseInt(options[0]), Integer.parseInt(options[1]))
@@ -266,21 +287,21 @@ public class AsmToUnitModuleTest {
 		System.out.println("*****" + testPath);
 		// compile the test.cpp
 		CompileResult result = CppCompiler.compile(testname, destDir.getPath(), true, isCovEnabled, useBoost);
-		
+
 		System.out.println(result); // OK
-		
+
 		// compiled?
 		if (result.success) {
 			// now the main class
 			CppGenerator cppgen = new CppGenerator(userOptions);
 			cppgen.generate(asm.getMain(), destDir.getPath() + File.separator + specname + ".cpp");
-			
+
 			for (Asm a : libraries) {
 				String libName = a.getName();
 				cppgen.generate(a, destDir.getPath() + File.separator + libName + ".cpp");
 				CppCompiler.compile(libName + ".cpp", destDir.getPath(), true, isCovEnabled, useBoost);
 			}
-			
+
 			// compile the asm.cpp (with the coverage)
 			result = CppCompiler.compile(specname + ".cpp", destDir.getPath(), true, isCovEnabled, useBoost);
 			System.out.println(result);
@@ -375,9 +396,9 @@ public class AsmToUnitModuleTest {
 
 	/**
 	 * run the command name and returns the output prodcued by it
-	 * 
+	 *
 	 * @return the output
-	 * 
+	 *
 	 */
 	protected static StringBuffer runexample(String name, File dir, String... extraCommands) {
 		StringBuffer result = new StringBuffer();
@@ -410,9 +431,9 @@ public class AsmToUnitModuleTest {
 		// System.out.println("Done");
 		return result;
 	}
-	
-	
-	
+
+
+
 	/**
 	 *  @author Belotti Andrea
 	 *  metodi per la generazione automatica delle libreire presenti nel file .asm principale
@@ -420,29 +441,29 @@ public class AsmToUnitModuleTest {
 	 */
 	protected static ArrayList<Asm> findNonStandardLibrary(AsmCollection asm) {
 		ArrayList<Asm> libraries = new ArrayList<>();
-		
-		for (Asm a : asm) 
+
+		for (Asm a : asm)
 			if(!(a.getName().contains("StandardLibrary") || a.getName().contains("CTLlibrary") || a.getName().contains("LTLlibrary") || a.getName().contains(asm.getMain().getName()))) {
 				libraries.add(a);
 				System.out.println("Aggiunta Libreria : " + a.getName() + "a libraries.");
 			}
-		
+
 		if(libraries.isEmpty())
 			System.out.println("Non esistono librerie oltre le librerie standard e il main");
-				
+
 		return libraries;
 	}
-	
+
 	/* Trovo il path assoluto delle libraries non standard (se dovesse servire)*/
 	protected static ArrayList<String> findLibrariesPath(String specpath, ArrayList<Asm> libraries, Asm main) {
 		ArrayList<String> path = new ArrayList<>();
-		String asmName = main.getName() + ".asm"; 
+		String asmName = main.getName() + ".asm";
 		String semiPath = specpath.replace(asmName, "");
-		
+
 		for (Asm l : libraries) {
 			path.add(semiPath + l.getName()  + ".asm");
 		}
 		return path;
 	}
-	
+
 }
