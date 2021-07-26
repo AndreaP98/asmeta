@@ -69,22 +69,17 @@ public class AsmToUnitModuleTest {
 		Environment.currentTimeUnit = ChronoUnit.SECONDS;
 		Environment.auto_increment_delta = 1;
 		CppCompiler.setCompiler("g++");
-		// testSpec(UNITFM.BOOST,
-		// "D:\\AgHome\\progettidaSVNGIT\\mvm-asmeta\\VentilatoreASM\\Ventilatore000.asm",SIMULATOR,"1",
-		// "5");
-		//testSpec(UNITFM.CATCH2, "D:\\AgHome\\progettidaSVNGIT\\mvm-asmeta\\VentilatoreASM\\Ventilatore000.asm",
-		//		SIMULATOR, "1", "5");
-		//testSpec(UNITFM.CATCH2, "D:\\ProgettoTesi\\FileTesi\\mvm-asmeta-master\\VentilatoreASM\\Ventilatore00.asm",
-		//		SIMULATOR, "1", "5");
-		//testSpec(UNITFM.CATCH2, "D:\\ProgettoTesi\\FileTesi\\mvm-asmeta-master\\VentilatoreASM\\Ventilatore0.asm",
-		//		SIMULATOR, "1", "5");
-		//testSpec(UNITFM.CATCH2, "D:\\ProgettoTesi\\FileTesi\\mvm-asmeta-master\\VentilatoreASM\\Ventilatore1.asm",
-		//		SIMULATOR, "1", "5");
-		//testSpec(UNITFM.CATCH2, "D:\\ProgettoTesi\\FileTesi\\mvm-asmeta-master\\VentilatoreASM\\Ventilatore2.asm",
-		//		SIMULATOR, "1", "5");
-		//testSpec(UNITFM.CATCH2, "C:\\Users\\Belotti Andrea\\git\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3.asm",
-		//		SIMULATOR, "1", "5");
-		testSpec(UNITFM.CATCH2, "../../../../../mvm-asmeta/VentilatoreASM_NewTime/Ventilatore3.asm",SIMULATOR,"15","5");		
+		testSpec(UNITFM.CATCH2, "../../../../../mvm-asmeta/VentilatoreASM_NewTime/Ventilatore3.asm",SIMULATOR,"200","100");
+	}
+	
+	@Test
+	public void testBombarda() throws Exception {
+		Logger.getLogger(CppCompiler.class).setLevel(Level.ALL);
+		Environment.timeMngt = TimeMngt.auto_increment;
+		Environment.currentTimeUnit = ChronoUnit.SECONDS;
+		Environment.auto_increment_delta = 1;
+		CppCompiler.setCompiler("g++");
+		testSpec(UNITFM.CATCH2, "../../../../../mvm-asmeta/BombardaTest/MVMcontroller03.asm",SIMULATOR,"50","50");	
 	}
 	
 	@Test

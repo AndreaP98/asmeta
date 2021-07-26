@@ -201,7 +201,7 @@ class OutputFunctionCreator {
 						
 				'''
 			}
-		else if (!binding.function.contains("(")) { //controllo?
+		else if (!binding.function.contains("(")) { 
 			return '''
 				if (firstStep || «binding.function»[0] != «binding.function»[1])
 				{
