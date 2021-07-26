@@ -1,9 +1,5 @@
 package org.asmeta.assertion_catalog;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -25,7 +21,6 @@ import java.awt.Font;
 import java.util.Map;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 public class LoadDialog extends JDialog {
@@ -111,13 +106,15 @@ public class LoadDialog extends JDialog {
 			    	int id=-99;
 					try {
 						id = containerInstance.startExecution(checkmodel);
-						JOptionPane.showConfirmDialog(contentPane, "Model " + Integer.toString(id) + " added!", "Success", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-						if(id >= SimGUI.getMaxInstances()) {
-							btnUpload.setEnabled(false);
-							JOptionPane.showConfirmDialog(contentPane, "All models added!", "Success", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-							btnLoad.doClick();
-						} else {
-							btnUpload.doClick();
+						if(id >= 1) {
+							JOptionPane.showConfirmDialog(contentPane, "Model " + Integer.toString(id) + " added!", "Success", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+							if(id >= SimGUI.getMaxInstances()) {
+								btnUpload.setEnabled(false);
+								JOptionPane.showConfirmDialog(contentPane, "All models added!", "Success", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+								btnLoad.doClick();
+							} else {
+								btnUpload.doClick();
+							}
 						}
 					} catch (MainRuleNotFoundException | AsmModelNotFoundException | FullMapException
 							| ParseException e1) {

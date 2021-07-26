@@ -258,7 +258,7 @@ public class SimulationContainer implements IModelExecution, IModelAdaptation {
 					simulationRunning=SimStatus.ROLLINGBACK;
 					printRollback(asmS.getSimulatorTable().get(id).getContSim(), asmS.rollback(id));
 				} catch (NullPointerException e1) {
-					System.out.println("no previous state");
+					System.out.println("No previous state!");
 				}finally {
 					simulationRunning=SimStatus.RUNNING;
 				}
@@ -282,7 +282,7 @@ public class SimulationContainer implements IModelExecution, IModelAdaptation {
 					simulationRunning=SimStatus.ROLLINGBACK;
 					printRollback(asmS.getSimulatorTable().get(id).getContSim(), asmS.rollback(id));
 				} catch (NullPointerException e1) {
-					System.out.println("no previous state");
+					System.out.println("No previous state!");
 				}finally {
 					simulationRunning=SimStatus.RUNNING;
 				}
@@ -291,19 +291,31 @@ public class SimulationContainer implements IModelExecution, IModelAdaptation {
 				System.err.println("No transition to step " + (asmS.getSimulatorTable().get(id).getContSim() + 1)
 						+ " for model "
 						+ asmS.getSimulatorTable().get(id).getModelPath().substring(modelPath.lastIndexOf("/") + 1));
-				rout = new RunOutput(Esit.UNSAFE, "Invalid Input value");
+				rout = new RunOutput(Esit.UNSAFE, "Invalid input value");
 				System.err.println(rout.toString());
 				try {
 					simulationRunning=SimStatus.ROLLINGBACK;
 					printRollback(asmS.getSimulatorTable().get(id).getContSim(), asmS.rollback(id));
 				} catch (NullPointerException e1) {
-					System.out.println("no previous state");
+					System.out.println("No previous state!");
 				}finally {
 					simulationRunning=SimStatus.RUNNING;
 				}
-			} /*else { //DEBUG ONLY
-				e.printStackTrace();
-			}*/
+			} else {
+				System.err.println("No transition to step " + (asmS.getSimulatorTable().get(id).getContSim() + 1)
+						+ " for model "
+						+ asmS.getSimulatorTable().get(id).getModelPath().substring(modelPath.lastIndexOf("/") + 1));
+				rout = new RunOutput(Esit.UNSAFE, "Invalid input or domain value");
+				System.err.println(rout.toString());
+				try {
+					simulationRunning=SimStatus.ROLLINGBACK;
+					printRollback(asmS.getSimulatorTable().get(id).getContSim(), asmS.rollback(id));
+				} catch (NullPointerException e1) {
+					System.out.println("No previous state!");
+				}finally {
+					simulationRunning=SimStatus.RUNNING;
+				}
+			}
 		}
 		simulationRunning = SimStatus.READY;
 		return rout; 
@@ -542,7 +554,7 @@ public class SimulationContainer implements IModelExecution, IModelAdaptation {
 //					if (!rolledbackQ)
 //						printRollback(asmS.getSimulatorTable().get(id).getContSim(), asmS.rollback(id));
 //				} catch (NullPointerException e1) {
-//					System.out.println("no previous state");
+//					System.out.println("No previous state!");
 //				}/* catch (EmptyStackException e1) {
 //					System.out.println("empty stack exception dal simulator");
 //				}*/
@@ -554,7 +566,7 @@ public class SimulationContainer implements IModelExecution, IModelAdaptation {
 //			/*try {
 //				printRollback(asmS.getSimulatorTable().get(id).getContSim(), asmS.rollback(id));
 //			} catch (NullPointerException e1) {
-//				System.out.println("no previous state");
+//				System.out.println("No previous state!");
 //			}*/
 //	    }else
 //	    	rout=routTO;
@@ -600,7 +612,7 @@ public class SimulationContainer implements IModelExecution, IModelAdaptation {
 					simulationRunning=SimStatus.ROLLINGBACK;
 					printRollback(asmS.getSimulatorTable().get(id).getContSim(), asmS.rollback(id));					
 				} catch (NullPointerException e1) {
-					System.out.println("no previous state");
+					System.out.println("No previous state!");
 				}finally {
 					simulationRunning=SimStatus.RUNNING;
 				}
@@ -622,7 +634,7 @@ public class SimulationContainer implements IModelExecution, IModelAdaptation {
 					simulationRunning=SimStatus.ROLLINGBACK;
 					printRollback(asmS.getSimulatorTable().get(id).getContSim(), asmS.rollback(id));
 				} catch (NullPointerException e1) {
-					System.out.println("no previous state");
+					System.out.println("No previous state!");
 				}finally {
 					simulationRunning=SimStatus.RUNNING;
 				}
@@ -636,7 +648,7 @@ public class SimulationContainer implements IModelExecution, IModelAdaptation {
 					simulationRunning=SimStatus.ROLLINGBACK;
 					printRollback(asmS.getSimulatorTable().get(id).getContSim(), asmS.rollback(id));
 				} catch (NullPointerException e1) {
-					System.out.println("no previous state");
+					System.out.println("No previous state!");
 				}finally {
 					simulationRunning=SimStatus.RUNNING;
 				}
@@ -803,7 +815,7 @@ public class SimulationContainer implements IModelExecution, IModelAdaptation {
 //				try {
 //					printRollback(asmS.getSimulatorTable().get(id).getContSim(), asmS.rollbackToState(id));
 //				} catch (NullPointerException e1) {
-//					System.out.println("no previous state");
+//					System.out.println("No previous state!");
 //				}/* catch (EmptyStackException e1) {
 //					System.out.println("empty stack exception dal simulator");
 //				}*/
@@ -815,7 +827,7 @@ public class SimulationContainer implements IModelExecution, IModelAdaptation {
 //			try {
 //				printRollback(asmS.getSimulatorTable().get(id).getContSim(), asmS.rollback(id));
 //			} catch (NullPointerException e1) {
-//				System.out.println("no previous state");
+//				System.out.println("No previous state!");
 //			}/* catch (EmptyStackException e1) {
 //				System.out.println("empty stack exception dal simulator");
 //			}*/
