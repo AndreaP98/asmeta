@@ -85,8 +85,7 @@ public class AsmToUnitModuleTest {
 		//		SIMULATOR, "1", "5");
 		//testSpec(UNITFM.CATCH2, "C:\\Users\\Belotti Andrea\\git\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3.asm",
 		//		SIMULATOR, "1", "5");
-		testSpec(UNITFM.CATCH2,
-		 "../../../../../mvm-asmeta/asm_models/MVM APPFM/MVMcontroller03.asm",SIMULATOR,"5","5");
+		testSpec(UNITFM.CATCH2, "../../../../../mvm-asmeta/asm_models/VentilatoreASM_NewTime/Ventilatore3.asm",SIMULATOR,"5","5");
 	}
 
 	//Belotti Andrea Test creazione Timer
@@ -294,7 +293,7 @@ public class AsmToUnitModuleTest {
 		if (result.success) {
 			// now the main class
 			CppGenerator cppgen = new CppGenerator(userOptions);
-			cppgen.generate(asm.getMain(), destDir.getPath() + File.separator + specname + ".cpp");
+			cppgen.generate(asm, destDir.getPath() + File.separator + specname + ".cpp"); //MODIFICA
 
 			for (Asm a : libraries) {
 				String libName = a.getName();
