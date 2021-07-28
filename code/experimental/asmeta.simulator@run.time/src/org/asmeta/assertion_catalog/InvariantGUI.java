@@ -1,7 +1,6 @@
 package org.asmeta.assertion_catalog;
 
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 
@@ -48,7 +47,7 @@ import javax.swing.UIManager;
  * @author Federico Rebucini, Hernan Altamirano, Daniele Troiano
  */
 public class InvariantGUI {
-	private static JFrame frame;
+	public static JFrame frame;
 	static List<String> invariantList = new ArrayList<String>();
 	//static DefaultListModel<String> model = new DefaultListModel<>();
 	static InvariantManager StartGui = new InvariantManager();

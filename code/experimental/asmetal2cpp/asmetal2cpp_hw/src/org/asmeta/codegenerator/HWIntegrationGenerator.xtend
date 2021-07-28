@@ -91,11 +91,21 @@ class HWIntegrationGenerator implements IGenerator {
 			''')
 			}
 		sb.append('''
-			void «asmCol.main.name»::getInputs(){
+			void «asmCol.main.name»::getInputs() {
+				''')
+				
+		for(Asm a : asmCol)
+			if(!(a.getName().contains("StandardLibrary") || a.getName().contains("CTLlibrary") || 
+						a.getName().contains("LTLlibrary") || a.getName().contains(asmCol.getMain().getName())
+			))
+				sb.append('''	«a.getName»::getInputs();
+				''');
+				
+		sb.append('''
 				«inputResult»
 			}
 								
-			void «asmCol.main.name»::setOutputs(){
+			void «asmCol.main.name»::setOutputs() {
 				«outputResult»
 				if (firstStep) firstStep = false;
 			}

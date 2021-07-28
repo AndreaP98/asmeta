@@ -53,7 +53,6 @@ class HeaderGenerator extends AsmToCGenerator {
 					#include <LiquidCrystal.h>
 					// #include <LiquidCrystal_I2C.h>
 					// #include <DS3231.h>
-					//Andrea Belotti
 					// #include <AsyncDelay.h>
 					// #include <boost_1_51_0.h>
 					#include <string.h>				
@@ -75,7 +74,6 @@ class HeaderGenerator extends AsmToCGenerator {
 				#include <set>
 				#include <map>
 				#include <list>
-				//Andrea Belotti
 				#include <chrono>
 				//#include <tuple>
 				//#include <bits/stl_tree.h>

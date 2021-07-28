@@ -62,7 +62,8 @@ class CppGenerator extends AsmToCGenerator {
 		val asmName = asm.name
 		functionSignature(asm)
 		// TODO fix include list
-		return '''
+		var StringBuffer sb = new StringBuffer();
+		sb.append('''
 				/* «asmName».cpp automatically generated from ASM2CODE */
 				#include "«asmName».h"
 				
@@ -100,15 +101,24 @@ class CppGenerator extends AsmToCGenerator {
 			
 				/* Apply the update set */
 				void «asmName»::fireUpdateSet(){
+					''');
+				for(Asm a : asmCol)
+					if(!(a.getName().contains("StandardLibrary") || a.getName().contains("CTLlibrary") || 
+								a.getName().contains("LTLlibrary") || a.getName().contains(asmCol.getMain().getName())
+					))
+						sb.append('''	«a.getName»::fireUpdateSet();
+						''');
+				sb.append('''	
 					«updateSet(asmCol)»
 				}
 				
 				/* init static functions and elements of abstract domains */
 				«initStatic(asm)»
 				
-		'''
-		
+		''');
+		return sb.toString;
 	}
+
 
 	override compileAsm(Asm asm) {
 		if (options.optimizeSeqMacroRule) {

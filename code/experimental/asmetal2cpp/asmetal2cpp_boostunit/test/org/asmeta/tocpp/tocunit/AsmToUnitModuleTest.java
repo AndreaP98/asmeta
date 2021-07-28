@@ -69,6 +69,7 @@ public class AsmToUnitModuleTest {
 		Environment.currentTimeUnit = ChronoUnit.SECONDS;
 		Environment.auto_increment_delta = 1;
 		CppCompiler.setCompiler("g++");
+
 		// testSpec(UNITFM.BOOST,
 		// "D:\\AgHome\\progettidaSVNGIT\\mvm-asmeta\\VentilatoreASM\\Ventilatore000.asm",SIMULATOR,"1",
 		// "5");
@@ -293,7 +294,7 @@ public class AsmToUnitModuleTest {
 		if (result.success) {
 			// now the main class
 			CppGenerator cppgen = new CppGenerator(userOptions);
-			cppgen.generate(asm.getMain(), destDir.getPath() + File.separator + specname + ".cpp");
+			cppgen.generate(asm, destDir.getPath() + File.separator + specname + ".cpp"); //MODIFICA
 
 			for (Asm a : libraries) {
 				String libName = a.getName();
