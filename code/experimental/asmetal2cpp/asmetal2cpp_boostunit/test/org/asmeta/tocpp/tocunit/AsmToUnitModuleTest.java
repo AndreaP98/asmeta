@@ -42,7 +42,7 @@ public class AsmToUnitModuleTest {
 	protected static final String NuSMV = "nusmv";
 	protected static final String SIMULATOR = "simulator";
 	private static TranslatorOptions userOptions = new TranslatorOptions(false, false, true, false);
-	protected static boolean isCovEnabled = false;
+	protected static boolean isCovEnabled = true;
 
 	@BeforeClass
 	public static void setUpLogger() {
@@ -85,7 +85,7 @@ public class AsmToUnitModuleTest {
 		//testSpec(UNITFM.CATCH2, "C:\\Users\\Belotti Andrea\\git\\mvm-asmeta\\VentilatoreASM_NewTime\\Ventilatore3.asm",
 		//		SIMULATOR, "1", "5");
 		testSpec(UNITFM.CATCH2,
-		 "../../../../../mvm-asmeta/asm_models/MVM APPFM/MVMcontroller03.asm",SIMULATOR,"5","5");
+		 "../../../../../mvm-asmeta/asm_models/MVM APPFM/MVMcontroller03NoTime.asm",SIMULATOR,"100","100");
 	}
 
 	//Belotti Andrea Test creazione Timer
