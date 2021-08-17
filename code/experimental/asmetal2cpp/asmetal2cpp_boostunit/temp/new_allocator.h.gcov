@@ -1,0 +1,564 @@
+        -:    0:Source:C:/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/ext/new_allocator.h
+        -:    0:Graph:Ventilatore3.gcno
+        -:    0:Data:Ventilatore3.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:// Allocator that wraps operator new -*- C++ -*-
+        -:    2:
+        -:    3:// Copyright (C) 2001-2018 Free Software Foundation, Inc.
+        -:    4://
+        -:    5:// This file is part of the GNU ISO C++ Library.  This library is free
+        -:    6:// software; you can redistribute it and/or modify it under the
+        -:    7:// terms of the GNU General Public License as published by the
+        -:    8:// Free Software Foundation; either version 3, or (at your option)
+        -:    9:// any later version.
+        -:   10:
+        -:   11:// This library is distributed in the hope that it will be useful,
+        -:   12:// but WITHOUT ANY WARRANTY; without even the implied warranty of
+        -:   13:// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        -:   14:// GNU General Public License for more details.
+        -:   15:
+        -:   16:// Under Section 7 of GPL version 3, you are granted additional
+        -:   17:// permissions described in the GCC Runtime Library Exception, version
+        -:   18:// 3.1, as published by the Free Software Foundation.
+        -:   19:
+        -:   20:// You should have received a copy of the GNU General Public License and
+        -:   21:// a copy of the GCC Runtime Library Exception along with this program;
+        -:   22:// see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+        -:   23:// <http://www.gnu.org/licenses/>.
+        -:   24:
+        -:   25:/** @file ext/new_allocator.h
+        -:   26: *  This file is a GNU extension to the Standard C++ Library.
+        -:   27: */
+        -:   28:
+        -:   29:#ifndef _NEW_ALLOCATOR_H
+        -:   30:#define _NEW_ALLOCATOR_H 1
+        -:   31:
+        -:   32:#include <bits/c++config.h>
+        -:   33:#include <new>
+        -:   34:#include <bits/functexcept.h>
+        -:   35:#include <bits/move.h>
+        -:   36:#if __cplusplus >= 201103L
+        -:   37:#include <type_traits>
+        -:   38:#endif
+        -:   39:
+        -:   40:namespace __gnu_cxx _GLIBCXX_VISIBILITY(default)
+        -:   41:{
+        -:   42:_GLIBCXX_BEGIN_NAMESPACE_VERSION
+        -:   43:
+        -:   44:  using std::size_t;
+        -:   45:  using std::ptrdiff_t;
+        -:   46:
+        -:   47:  /**
+        -:   48:   *  @brief  An allocator that uses global new, as per [20.4].
+        -:   49:   *  @ingroup allocators
+        -:   50:   *
+        -:   51:   *  This is precisely the allocator defined in the C++ Standard.
+        -:   52:   *    - all allocation calls operator new
+        -:   53:   *    - all deallocation calls operator delete
+        -:   54:   *
+        -:   55:   *  @tparam  _Tp  Type of allocated object.
+        -:   56:   */
+        -:   57:  template<typename _Tp>
+        -:   58:    class new_allocator
+        -:   59:    {
+        -:   60:    public:
+        -:   61:      typedef size_t     size_type;
+        -:   62:      typedef ptrdiff_t  difference_type;
+        -:   63:      typedef _Tp*       pointer;
+        -:   64:      typedef const _Tp* const_pointer;
+        -:   65:      typedef _Tp&       reference;
+        -:   66:      typedef const _Tp& const_reference;
+        -:   67:      typedef _Tp        value_type;
+        -:   68:
+        -:   69:      template<typename _Tp1>
+        -:   70:	struct rebind
+        -:   71:	{ typedef new_allocator<_Tp1> other; };
+        -:   72:
+        -:   73:#if __cplusplus >= 201103L
+        -:   74:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:   75:      // 2103. propagate_on_container_move_assignment
+        -:   76:      typedef std::true_type propagate_on_container_move_assignment;
+        -:   77:#endif
+        -:   78:
+       40:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::YesOrNo> >::new_allocator():
+        5:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::ValveStatus> >::new_allocator():
+        5:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::Modes> >::new_allocator():
+        5:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::States> >::new_allocator():
+        5:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<Ventilatore3namespace::YesOrNo>::new_allocator():
+        5:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<Ventilatore3namespace::ValveStatus>::new_allocator():
+        5:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<Ventilatore3namespace::Modes>::new_allocator():
+        5:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<Ventilatore3namespace::States>::new_allocator():
+        5:   79:      new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+        -:   80:
+       40:   81:      new_allocator(const new_allocator&) _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::YesOrNo> >::new_allocator(__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::YesOrNo> > const&):
+        5:   81:      new_allocator(const new_allocator&) _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::ValveStatus> >::new_allocator(__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::ValveStatus> > const&):
+        5:   81:      new_allocator(const new_allocator&) _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::Modes> >::new_allocator(__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::Modes> > const&):
+        5:   81:      new_allocator(const new_allocator&) _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::States> >::new_allocator(__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::States> > const&):
+        5:   81:      new_allocator(const new_allocator&) _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<Ventilatore3namespace::YesOrNo>::new_allocator(__gnu_cxx::new_allocator<Ventilatore3namespace::YesOrNo> const&):
+        5:   81:      new_allocator(const new_allocator&) _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<Ventilatore3namespace::ValveStatus>::new_allocator(__gnu_cxx::new_allocator<Ventilatore3namespace::ValveStatus> const&):
+        5:   81:      new_allocator(const new_allocator&) _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<Ventilatore3namespace::Modes>::new_allocator(__gnu_cxx::new_allocator<Ventilatore3namespace::Modes> const&):
+        5:   81:      new_allocator(const new_allocator&) _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<Ventilatore3namespace::States>::new_allocator(__gnu_cxx::new_allocator<Ventilatore3namespace::States> const&):
+        5:   81:      new_allocator(const new_allocator&) _GLIBCXX_USE_NOEXCEPT { }
+------------------
+        -:   82:
+        -:   83:      template<typename _Tp1>
+        -:   84:	new_allocator(const new_allocator<_Tp1>&) _GLIBCXX_USE_NOEXCEPT { }
+        -:   85:
+      40*:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::YesOrNo> >::~new_allocator():
+    #####:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::ValveStatus> >::~new_allocator():
+    #####:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::Modes> >::~new_allocator():
+    #####:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::States> >::~new_allocator():
+    #####:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit> > >::~new_allocator():
+    #####:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, long> > >::~new_allocator():
+    #####:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<TimeLibrarynamespace::TimerUnit> >::~new_allocator():
+    #####:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<Ventilatore3namespace::YesOrNo>::~new_allocator():
+       10:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<Ventilatore3namespace::ValveStatus>::~new_allocator():
+       10:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<Ventilatore3namespace::Modes>::~new_allocator():
+       10:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+__gnu_cxx::new_allocator<Ventilatore3namespace::States>::~new_allocator():
+       10:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+------------------
+        -:   87:
+        -:   88:      pointer
+        -:   89:      address(reference __x) const _GLIBCXX_NOEXCEPT
+        -:   90:      { return std::__addressof(__x); }
+        -:   91:
+        -:   92:      const_pointer
+        -:   93:      address(const_reference __x) const _GLIBCXX_NOEXCEPT
+        -:   94:      { return std::__addressof(__x); }
+        -:   95:
+        -:   96:      // NB: __n is permitted to be 0.  The C++ standard says nothing
+        -:   97:      // about what the return value is when __n == 0.
+        -:   98:      pointer
+     107*:   99:      allocate(size_type __n, const void* = static_cast<const void*>(0))
+        -:  100:      {
+     107*:  101:	if (__n > this->max_size())
+    #####:  102:	  std::__throw_bad_alloc();
+        -:  103:
+        -:  104:#if __cpp_aligned_new
+        -:  105:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  106:	  {
+        -:  107:	    std::align_val_t __al = std::align_val_t(alignof(_Tp));
+        -:  108:	    return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
+        -:  109:	  }
+        -:  110:#endif
+     107*:  111:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+        -:  112:      }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::YesOrNo> >::allocate(unsigned long long, void const*):
+       10:   99:      allocate(size_type __n, const void* = static_cast<const void*>(0))
+        -:  100:      {
+       10:  101:	if (__n > this->max_size())
+    #####:  102:	  std::__throw_bad_alloc();
+        -:  103:
+        -:  104:#if __cpp_aligned_new
+        -:  105:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  106:	  {
+        -:  107:	    std::align_val_t __al = std::align_val_t(alignof(_Tp));
+        -:  108:	    return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
+        -:  109:	  }
+        -:  110:#endif
+       10:  111:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+        -:  112:      }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::ValveStatus> >::allocate(unsigned long long, void const*):
+       10:   99:      allocate(size_type __n, const void* = static_cast<const void*>(0))
+        -:  100:      {
+       10:  101:	if (__n > this->max_size())
+    #####:  102:	  std::__throw_bad_alloc();
+        -:  103:
+        -:  104:#if __cpp_aligned_new
+        -:  105:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  106:	  {
+        -:  107:	    std::align_val_t __al = std::align_val_t(alignof(_Tp));
+        -:  108:	    return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
+        -:  109:	  }
+        -:  110:#endif
+       10:  111:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+        -:  112:      }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::Modes> >::allocate(unsigned long long, void const*):
+       10:   99:      allocate(size_type __n, const void* = static_cast<const void*>(0))
+        -:  100:      {
+       10:  101:	if (__n > this->max_size())
+    #####:  102:	  std::__throw_bad_alloc();
+        -:  103:
+        -:  104:#if __cpp_aligned_new
+        -:  105:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  106:	  {
+        -:  107:	    std::align_val_t __al = std::align_val_t(alignof(_Tp));
+        -:  108:	    return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
+        -:  109:	  }
+        -:  110:#endif
+       10:  111:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+        -:  112:      }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::States> >::allocate(unsigned long long, void const*):
+       70:   99:      allocate(size_type __n, const void* = static_cast<const void*>(0))
+        -:  100:      {
+       70:  101:	if (__n > this->max_size())
+    #####:  102:	  std::__throw_bad_alloc();
+        -:  103:
+        -:  104:#if __cpp_aligned_new
+        -:  105:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  106:	  {
+        -:  107:	    std::align_val_t __al = std::align_val_t(alignof(_Tp));
+        -:  108:	    return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
+        -:  109:	  }
+        -:  110:#endif
+       70:  111:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+        -:  112:      }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit> > >::allocate(unsigned long long, void const*):
+    #####:   99:      allocate(size_type __n, const void* = static_cast<const void*>(0))
+        -:  100:      {
+    #####:  101:	if (__n > this->max_size())
+    #####:  102:	  std::__throw_bad_alloc();
+        -:  103:
+        -:  104:#if __cpp_aligned_new
+        -:  105:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  106:	  {
+        -:  107:	    std::align_val_t __al = std::align_val_t(alignof(_Tp));
+        -:  108:	    return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
+        -:  109:	  }
+        -:  110:#endif
+    #####:  111:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+        -:  112:      }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, long> > >::allocate(unsigned long long, void const*):
+    #####:   99:      allocate(size_type __n, const void* = static_cast<const void*>(0))
+        -:  100:      {
+    #####:  101:	if (__n > this->max_size())
+    #####:  102:	  std::__throw_bad_alloc();
+        -:  103:
+        -:  104:#if __cpp_aligned_new
+        -:  105:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  106:	  {
+        -:  107:	    std::align_val_t __al = std::align_val_t(alignof(_Tp));
+        -:  108:	    return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
+        -:  109:	  }
+        -:  110:#endif
+    #####:  111:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+        -:  112:      }
+------------------
+__gnu_cxx::new_allocator<TimeLibrarynamespace::Timer*>::allocate(unsigned long long, void const*):
+        7:   99:      allocate(size_type __n, const void* = static_cast<const void*>(0))
+        -:  100:      {
+        7:  101:	if (__n > this->max_size())
+    #####:  102:	  std::__throw_bad_alloc();
+        -:  103:
+        -:  104:#if __cpp_aligned_new
+        -:  105:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  106:	  {
+        -:  107:	    std::align_val_t __al = std::align_val_t(alignof(_Tp));
+        -:  108:	    return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
+        -:  109:	  }
+        -:  110:#endif
+        7:  111:	return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
+        -:  112:      }
+------------------
+        -:  113:
+        -:  114:      // __p is not permitted to be a null pointer.
+        -:  115:      void
+    #####:  116:      deallocate(pointer __p, size_type)
+        -:  117:      {
+        -:  118:#if __cpp_aligned_new
+        -:  119:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  120:	  {
+        -:  121:	    ::operator delete(__p, std::align_val_t(alignof(_Tp)));
+        -:  122:	    return;
+        -:  123:	  }
+        -:  124:#endif
+    #####:  125:	::operator delete(__p);
+    #####:  126:      }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::YesOrNo> >::deallocate(std::_Rb_tree_node<Ventilatore3namespace::YesOrNo>*, unsigned long long):
+    #####:  116:      deallocate(pointer __p, size_type)
+        -:  117:      {
+        -:  118:#if __cpp_aligned_new
+        -:  119:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  120:	  {
+        -:  121:	    ::operator delete(__p, std::align_val_t(alignof(_Tp)));
+        -:  122:	    return;
+        -:  123:	  }
+        -:  124:#endif
+    #####:  125:	::operator delete(__p);
+    #####:  126:      }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::ValveStatus> >::deallocate(std::_Rb_tree_node<Ventilatore3namespace::ValveStatus>*, unsigned long long):
+    #####:  116:      deallocate(pointer __p, size_type)
+        -:  117:      {
+        -:  118:#if __cpp_aligned_new
+        -:  119:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  120:	  {
+        -:  121:	    ::operator delete(__p, std::align_val_t(alignof(_Tp)));
+        -:  122:	    return;
+        -:  123:	  }
+        -:  124:#endif
+    #####:  125:	::operator delete(__p);
+    #####:  126:      }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::Modes> >::deallocate(std::_Rb_tree_node<Ventilatore3namespace::Modes>*, unsigned long long):
+    #####:  116:      deallocate(pointer __p, size_type)
+        -:  117:      {
+        -:  118:#if __cpp_aligned_new
+        -:  119:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  120:	  {
+        -:  121:	    ::operator delete(__p, std::align_val_t(alignof(_Tp)));
+        -:  122:	    return;
+        -:  123:	  }
+        -:  124:#endif
+    #####:  125:	::operator delete(__p);
+    #####:  126:      }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::States> >::deallocate(std::_Rb_tree_node<Ventilatore3namespace::States>*, unsigned long long):
+    #####:  116:      deallocate(pointer __p, size_type)
+        -:  117:      {
+        -:  118:#if __cpp_aligned_new
+        -:  119:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  120:	  {
+        -:  121:	    ::operator delete(__p, std::align_val_t(alignof(_Tp)));
+        -:  122:	    return;
+        -:  123:	  }
+        -:  124:#endif
+    #####:  125:	::operator delete(__p);
+    #####:  126:      }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit> > >::deallocate(std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit> >*, unsigned long long):
+    #####:  116:      deallocate(pointer __p, size_type)
+        -:  117:      {
+        -:  118:#if __cpp_aligned_new
+        -:  119:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  120:	  {
+        -:  121:	    ::operator delete(__p, std::align_val_t(alignof(_Tp)));
+        -:  122:	    return;
+        -:  123:	  }
+        -:  124:#endif
+    #####:  125:	::operator delete(__p);
+    #####:  126:      }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, long> > >::deallocate(std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, long> >*, unsigned long long):
+    #####:  116:      deallocate(pointer __p, size_type)
+        -:  117:      {
+        -:  118:#if __cpp_aligned_new
+        -:  119:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  120:	  {
+        -:  121:	    ::operator delete(__p, std::align_val_t(alignof(_Tp)));
+        -:  122:	    return;
+        -:  123:	  }
+        -:  124:#endif
+    #####:  125:	::operator delete(__p);
+    #####:  126:      }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<TimeLibrarynamespace::TimerUnit> >::deallocate(std::_Rb_tree_node<TimeLibrarynamespace::TimerUnit>*, unsigned long long):
+    #####:  116:      deallocate(pointer __p, size_type)
+        -:  117:      {
+        -:  118:#if __cpp_aligned_new
+        -:  119:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  120:	  {
+        -:  121:	    ::operator delete(__p, std::align_val_t(alignof(_Tp)));
+        -:  122:	    return;
+        -:  123:	  }
+        -:  124:#endif
+    #####:  125:	::operator delete(__p);
+    #####:  126:      }
+------------------
+__gnu_cxx::new_allocator<TimeLibrarynamespace::Timer*>::deallocate(TimeLibrarynamespace::Timer**, unsigned long long):
+    #####:  116:      deallocate(pointer __p, size_type)
+        -:  117:      {
+        -:  118:#if __cpp_aligned_new
+        -:  119:	if (alignof(_Tp) > __STDCPP_DEFAULT_NEW_ALIGNMENT__)
+        -:  120:	  {
+        -:  121:	    ::operator delete(__p, std::align_val_t(alignof(_Tp)));
+        -:  122:	    return;
+        -:  123:	  }
+        -:  124:#endif
+    #####:  125:	::operator delete(__p);
+    #####:  126:      }
+------------------
+        -:  127:
+        -:  128:      size_type
+     121*:  129:      max_size() const _GLIBCXX_USE_NOEXCEPT
+     121*:  130:      { return size_t(-1) / sizeof(_Tp); }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::YesOrNo> >::max_size() const:
+       10:  129:      max_size() const _GLIBCXX_USE_NOEXCEPT
+       10:  130:      { return size_t(-1) / sizeof(_Tp); }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::ValveStatus> >::max_size() const:
+       10:  129:      max_size() const _GLIBCXX_USE_NOEXCEPT
+       10:  130:      { return size_t(-1) / sizeof(_Tp); }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::Modes> >::max_size() const:
+       10:  129:      max_size() const _GLIBCXX_USE_NOEXCEPT
+       10:  130:      { return size_t(-1) / sizeof(_Tp); }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::States> >::max_size() const:
+       70:  129:      max_size() const _GLIBCXX_USE_NOEXCEPT
+       70:  130:      { return size_t(-1) / sizeof(_Tp); }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit> > >::max_size() const:
+    #####:  129:      max_size() const _GLIBCXX_USE_NOEXCEPT
+    #####:  130:      { return size_t(-1) / sizeof(_Tp); }
+------------------
+__gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, long> > >::max_size() const:
+    #####:  129:      max_size() const _GLIBCXX_USE_NOEXCEPT
+    #####:  130:      { return size_t(-1) / sizeof(_Tp); }
+------------------
+__gnu_cxx::new_allocator<TimeLibrarynamespace::Timer*>::max_size() const:
+       21:  129:      max_size() const _GLIBCXX_USE_NOEXCEPT
+       21:  130:      { return size_t(-1) / sizeof(_Tp); }
+------------------
+        -:  131:
+        -:  132:#if __cplusplus >= 201103L
+        -:  133:      template<typename _Up, typename... _Args>
+        -:  134:	void
+     900*:  135:	construct(_Up* __p, _Args&&... __args)
+     900*:  136:	{ ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::YesOrNo> >::construct<Ventilatore3namespace::YesOrNo, Ventilatore3namespace::YesOrNo const&>(Ventilatore3namespace::YesOrNo*, Ventilatore3namespace::YesOrNo const&):
+       10:  135:	construct(_Up* __p, _Args&&... __args)
+       10:  136:	{ ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::ValveStatus> >::construct<Ventilatore3namespace::ValveStatus, Ventilatore3namespace::ValveStatus const&>(Ventilatore3namespace::ValveStatus*, Ventilatore3namespace::ValveStatus const&):
+       10:  135:	construct(_Up* __p, _Args&&... __args)
+       10:  136:	{ ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::Modes> >::construct<Ventilatore3namespace::Modes, Ventilatore3namespace::Modes const&>(Ventilatore3namespace::Modes*, Ventilatore3namespace::Modes const&):
+       10:  135:	construct(_Up* __p, _Args&&... __args)
+       10:  136:	{ ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::States> >::construct<Ventilatore3namespace::States, Ventilatore3namespace::States const&>(Ventilatore3namespace::States*, Ventilatore3namespace::States const&):
+       70:  135:	construct(_Up* __p, _Args&&... __args)
+       70:  136:	{ ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit> > >::construct<std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit>, std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit> const&>(std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit>*, std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit> const&):
+    #####:  135:	construct(_Up* __p, _Args&&... __args)
+    #####:  136:	{ ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, long> > >::construct<std::pair<TimeLibrarynamespace::Timer* const, long>, std::pair<TimeLibrarynamespace::Timer* const, long> const&>(std::pair<TimeLibrarynamespace::Timer* const, long>*, std::pair<TimeLibrarynamespace::Timer* const, long> const&):
+    #####:  135:	construct(_Up* __p, _Args&&... __args)
+    #####:  136:	{ ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit> > >::construct<std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit>, std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit> >(std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit>*, std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit>&&):
+      150:  135:	construct(_Up* __p, _Args&&... __args)
+      150:  136:	{ ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, long> > >::construct<std::pair<TimeLibrarynamespace::Timer* const, long>, std::pair<TimeLibrarynamespace::Timer* const, long> >(std::pair<TimeLibrarynamespace::Timer* const, long>*, std::pair<TimeLibrarynamespace::Timer* const, long>&&):
+      600:  135:	construct(_Up* __p, _Args&&... __args)
+      600:  136:	{ ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+------------------
+void __gnu_cxx::new_allocator<TimeLibrarynamespace::Timer*>::construct<TimeLibrarynamespace::Timer*, TimeLibrarynamespace::Timer*>(TimeLibrarynamespace::Timer**, TimeLibrarynamespace::Timer*&&):
+       50:  135:	construct(_Up* __p, _Args&&... __args)
+       50:  136:	{ ::new((void *)__p) _Up(std::forward<_Args>(__args)...); }
+------------------
+        -:  137:
+        -:  138:      template<typename _Up>
+        -:  139:	void
+    #####:  140:	destroy(_Up* __p) { __p->~_Up(); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::YesOrNo> >::destroy<Ventilatore3namespace::YesOrNo>(Ventilatore3namespace::YesOrNo*):
+    #####:  140:	destroy(_Up* __p) { __p->~_Up(); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::ValveStatus> >::destroy<Ventilatore3namespace::ValveStatus>(Ventilatore3namespace::ValveStatus*):
+    #####:  140:	destroy(_Up* __p) { __p->~_Up(); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::Modes> >::destroy<Ventilatore3namespace::Modes>(Ventilatore3namespace::Modes*):
+    #####:  140:	destroy(_Up* __p) { __p->~_Up(); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<Ventilatore3namespace::States> >::destroy<Ventilatore3namespace::States>(Ventilatore3namespace::States*):
+    #####:  140:	destroy(_Up* __p) { __p->~_Up(); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit> > >::destroy<std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit> >(std::pair<TimeLibrarynamespace::Timer* const, TimeLibrarynamespace::TimerUnit>*):
+    #####:  140:	destroy(_Up* __p) { __p->~_Up(); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<std::pair<TimeLibrarynamespace::Timer* const, long> > >::destroy<std::pair<TimeLibrarynamespace::Timer* const, long> >(std::pair<TimeLibrarynamespace::Timer* const, long>*):
+    #####:  140:	destroy(_Up* __p) { __p->~_Up(); }
+------------------
+void __gnu_cxx::new_allocator<std::_Rb_tree_node<TimeLibrarynamespace::TimerUnit> >::destroy<TimeLibrarynamespace::TimerUnit>(TimeLibrarynamespace::TimerUnit*):
+    #####:  140:	destroy(_Up* __p) { __p->~_Up(); }
+------------------
+void __gnu_cxx::new_allocator<TimeLibrarynamespace::Timer*>::destroy<TimeLibrarynamespace::Timer*>(TimeLibrarynamespace::Timer**):
+    #####:  140:	destroy(_Up* __p) { __p->~_Up(); }
+------------------
+        -:  141:#else
+        -:  142:      // _GLIBCXX_RESOLVE_LIB_DEFECTS
+        -:  143:      // 402. wrong new expression in [some_] allocator::construct
+        -:  144:      void
+        -:  145:      construct(pointer __p, const _Tp& __val)
+        -:  146:      { ::new((void *)__p) _Tp(__val); }
+        -:  147:
+        -:  148:      void
+        -:  149:      destroy(pointer __p) { __p->~_Tp(); }
+        -:  150:#endif
+        -:  151:    };
+        -:  152:
+        -:  153:  template<typename _Tp>
+        -:  154:    inline bool
+        -:  155:    operator==(const new_allocator<_Tp>&, const new_allocator<_Tp>&)
+        -:  156:    { return true; }
+        -:  157:
+        -:  158:  template<typename _Tp>
+        -:  159:    inline bool
+        -:  160:    operator!=(const new_allocator<_Tp>&, const new_allocator<_Tp>&)
+        -:  161:    { return false; }
+        -:  162:
+        -:  163:_GLIBCXX_END_NAMESPACE_VERSION
+        -:  164:} // namespace
+        -:  165:
+        -:  166:#endif

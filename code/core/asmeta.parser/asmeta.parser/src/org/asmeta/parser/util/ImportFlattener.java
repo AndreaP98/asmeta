@@ -35,6 +35,7 @@ public class ImportFlattener {
 	private ArrayList<Function> functions;
 	private ArrayList<DomainDefinition> domainDefs;
 	private ArrayList<DomainInitialization> domainInits;
+	private Set<Asm> asmSet;
 
 	// where the asm is located in the file system
 	private String folder;
@@ -72,6 +73,7 @@ public class ImportFlattener {
 		Initialization defaultInitialState;
 		Set<Asm> asmSet = new HashSet<Asm>();
 		getAsms(list, asmSet);
+		this.asmSet = asmSet;
 		for (Asm asm : asmSet) {
 			signature = asm.getHeaderSection().getSignature();
 			domains.addAll(signature.getDomain());
@@ -136,4 +138,7 @@ public class ImportFlattener {
 		return domainInits;
 	}
 
+	public Set<Asm> getAsmSet() {
+		return this.asmSet;
+	}
 }

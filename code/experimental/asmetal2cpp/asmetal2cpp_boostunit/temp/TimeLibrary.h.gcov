@@ -1,0 +1,80 @@
+        -:    0:Source:TimeLibrary.h
+        -:    0:Graph:Ventilatore3.gcno
+        -:    0:Data:Ventilatore3.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/* this file is under copyright*/
+        -:    2:	// TimeLibrary.h automatically generated from ASMETA2CODE
+        -:    3:	#ifndef TIMELIBRARY_H
+        -:    4:	#define TIMELIBRARY_H
+        -:    5:	
+        -:    6:	/*Arduino.h uses WString instead... */
+        -:    7:	#include <string.h>				
+        -:    8:	#include <iostream> 
+        -:    9:	#include <vector> 
+        -:   10:	#include <set>
+        -:   11:	#include <map>
+        -:   12:	#include <list>
+        -:   13:	#include <chrono>
+        -:   14:	//#include <tuple>
+        -:   15:	//#include <bits/stl_tree.h>
+        -:   16:	
+        -:   17:	using namespace std;
+        -:   18:	
+        -:   19:	//typedef std::string String;
+        -:   20:	#define ANY String
+        -:   21:	#define UNDEF NULL
+        -:   22:	
+        -:   23:	
+        -:   24:	
+        -:   25:	
+        -:   26:/* DOMAIN DEFINITIONS */
+        -:   27:namespace TimeLibrarynamespace{
+        -:   28:	class Timer;
+        -:   29:	enum TimerUnit {NANOSEC, MILLISEC, SEC, MIN, HOUR};
+        -:   30:	
+        -:   31:	}
+        -:   32:
+        -:   33:	
+        -:   34:	using namespace TimeLibrarynamespace;
+        -:   35:	
+        -:   36:	class TimeLibrarynamespace::Timer{
+        -:   37:	public:
+        -:   38:	static vector<Timer*> elems;
+       50:   39:	Timer(){elems.push_back(this);}
+        -:   40:	};
+        -:   41:	
+        -:   42:	class TimeLibrary {
+        -:   43:	  
+        -:   44:	/* DOMAIN CONTAINERS */
+        -:   45:	const set<TimerUnit> TimerUnit_elems;
+        -:   46:	
+        -:   47:	public:
+        -:   48:	/* FUNCTIONS */
+        -:   49:	map<Timer*, long> start[2];
+        -:   50:	map<Timer*, long> duration[2];
+        -:   51:	map<Timer*, TimerUnit> timerUnit[2];
+        -:   52:	long currentTime (Timer* param0_currentTime);
+        -:   53:	bool expired (Timer* param0_expired);
+        -:   54:	long mCurrTimeNanosecs;
+        -:   55:	long mCurrTimeMillisecs;
+        -:   56:	long mCurrTimeSecs;
+        -:   57:	long mCurrTimeMins;
+        -:   58:	long mCurrTimeHours;
+        -:   59:	/* RULE DEFINITION */
+        -:   60:	void r_reset_timer (Timer* _t);
+        -:   61:	void r_set_duration (Timer* _t, long _ms);
+        -:   62:	void r_set_timer_unit (Timer* _t, TimerUnit _unit);
+        -:   63:	
+        -:   64:	TimeLibrary();
+        -:   65:	
+        -:   66:	void initControlledWithMonitored();
+        -:   67:	
+        -:   68:	void getInputs();
+        -:   69:	
+        -:   70:	void setOutputs(); 
+        -:   71:	
+        -:   72:	void fireUpdateSet();
+        -:   73:
+        -:   74:	};
+        -:   75:	#endif

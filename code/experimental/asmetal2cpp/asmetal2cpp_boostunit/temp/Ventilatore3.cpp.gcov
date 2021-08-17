@@ -1,0 +1,754 @@
+        -:    0:Source:Ventilatore3.cpp
+        -:    0:Graph:Ventilatore3.gcno
+        -:    0:Data:Ventilatore3.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:	/* Ventilatore3.cpp automatically generated from ASM2CODE */
+        -:    2:	#include "Ventilatore3.h"
+        -:    3:	
+        -:    4:	using namespace Ventilatore3namespace;
+        -:    5:	
+        -:    6:	/* Conversion of ASM rules in C++ methods */
+        1:    7:	void Ventilatore3::r_startupEnded(){
+        1:    8:		state[1] = SELFTEST;
+        1:    9:	}
+    #####:   10:	void Ventilatore3::r_ventOffRequested(){
+    #####:   11:		stopVentilation[1] = true;
+    #####:   12:	}
+    #####:   13:	void Ventilatore3::r_ventOffPCV(){
+        -:   14:		{ //par
+    #####:   15:			state[1] = VENTILATIONOFF;
+    #####:   16:			stopVentilation[1] = false;
+    #####:   17:			apneaBackupMode[1] = false;
+        -:   18:		}//endpar
+    #####:   19:	}
+    #####:   20:	void Ventilatore3::r_ventOffPSV(){
+        -:   21:		{ //par
+    #####:   22:			state[1] = VENTILATIONOFF;
+    #####:   23:			stopVentilation[1] = false;
+        -:   24:		}//endpar
+    #####:   25:	}
+    #####:   26:	void Ventilatore3::r_ventOffFirstTime(){
+    #####:   27:		state[1] = VENTILATIONOFF;
+    #####:   28:	}
+        4:   29:	void Ventilatore3::r_turnOff(){
+        -:   30:		{ //par
+        4:   31:			iValve[1] = CLOSED;
+        4:   32:			oValve[1] = OPEN;
+        4:   33:			state[1] = OFF;
+        -:   34:		}//endpar
+        4:   35:	}
+    #####:   36:	void Ventilatore3::r_PCVinsp(){
+        -:   37:		{ //par
+    #####:   38:			state[1] = PCV_INSP;
+    #####:   39:			iValve[1] = OPEN;
+    #####:   40:			r_reset_timer(timerInspirationDur);
+        -:   41:		}//endpar
+    #####:   42:	}
+    #####:   43:	void Ventilatore3::r_PCVinspPauseTimeout(){
+        -:   44:		{ //par
+    #####:   45:			r_PCVinsp();
+    #####:   46:			pauseOff[1] = true;
+    #####:   47:			r_reset_timer(timerPauseTimeout);
+        -:   48:		}//endpar
+    #####:   49:	}
+    #####:   50:	void Ventilatore3::r_PCVinspOValve(){
+        -:   51:		{ //par
+    #####:   52:			r_PCVinsp();
+    #####:   53:			oValve[1] = CLOSED;
+        -:   54:		}//endpar
+    #####:   55:	}
+    #####:   56:	void Ventilatore3::r_PCVinspApnea(){
+        -:   57:		{ //par
+    #####:   58:			r_PCVinspOValve();
+    #####:   59:			apneaAlarm[1] = true;
+    #####:   60:			apneaBackupMode[1] = true;
+        -:   61:		}//endpar
+    #####:   62:	}
+    #####:   63:	void Ventilatore3::r_PSVinsp(){
+        -:   64:		{ //par
+    #####:   65:			state[1] = PSV_INSP;
+    #####:   66:			iValve[1] = OPEN;
+    #####:   67:			r_reset_timer(timerMaxInspTimePSV);
+        -:   68:		}//endpar
+    #####:   69:	}
+    #####:   70:	void Ventilatore3::r_PSVinspOValve(){
+        -:   71:		{ //par
+    #####:   72:			r_PSVinsp();
+    #####:   73:			oValve[1] = CLOSED;
+    #####:   74:			r_reset_timer(timerMaxInspTimePSV);
+        -:   75:		}//endpar
+    #####:   76:	}
+    #####:   77:	void Ventilatore3::r_PSVinspPauseTimeout(){
+        -:   78:		{ //par
+    #####:   79:			r_PSVinsp();
+    #####:   80:			pauseOff[1] = true;
+    #####:   81:			r_reset_timer(timerPauseTimeout);
+        -:   82:		}//endpar
+    #####:   83:	}
+    #####:   84:	void Ventilatore3::r_PCVexp(){
+        -:   85:		{ //par
+    #####:   86:			state[1] = PCV_EXP;
+    #####:   87:			oValve[1] = OPEN;
+    #####:   88:			r_reset_timer(timerExpirationDur);
+    #####:   89:			r_reset_timer(timerTriggerWindowDelay);
+        -:   90:		}//endpar
+    #####:   91:	}
+    #####:   92:	void Ventilatore3::r_PCVexpPauseTimeout(){
+        -:   93:		{ //par
+    #####:   94:			r_PCVexp();
+    #####:   95:			pauseOff[1] = true;
+    #####:   96:			r_reset_timer(timerPauseTimeout);
+        -:   97:		}//endpar
+    #####:   98:	}
+    #####:   99:	void Ventilatore3::r_PCVexpIValve(){
+        -:  100:		{ //par
+    #####:  101:			r_PCVexp();
+    #####:  102:			iValve[1] = CLOSED;
+        -:  103:		}//endpar
+    #####:  104:	}
+    #####:  105:	void Ventilatore3::r_PSVexp(){
+        -:  106:		{ //par
+    #####:  107:			state[1] = PSV_EXP;
+    #####:  108:			oValve[1] = OPEN;
+    #####:  109:			r_reset_timer(timerMinExpTimePSV);
+    #####:  110:			r_reset_timer(timerApneaLag);
+    #####:  111:			r_reset_timer(timerTriggerWindowDelay);
+        -:  112:		}//endpar
+    #####:  113:	}
+    #####:  114:	void Ventilatore3::r_PSVexpPauseTimeout(){
+        -:  115:		{ //par
+    #####:  116:			r_PSVexp();
+    #####:  117:			pauseOff[1] = true;
+    #####:  118:			r_reset_timer(timerPauseTimeout);
+        -:  119:		}//endpar
+    #####:  120:	}
+    #####:  121:	void Ventilatore3::r_PSVexpIValve(){
+        -:  122:		{ //par
+    #####:  123:			r_PSVexp();
+    #####:  124:			iValve[1] = CLOSED;
+        -:  125:		}//endpar
+    #####:  126:	}
+    #####:  127:	void Ventilatore3::r_PSVexpIValveFromPCV(){
+        -:  128:		{ //par
+    #####:  129:			r_PSVexp();
+    #####:  130:			iValve[1] = CLOSED;
+    #####:  131:			apneaBackupMode[1] = false;
+        -:  132:		}//endpar
+    #####:  133:	}
+    #####:  134:	void Ventilatore3::r_PCVinPause(){
+        -:  135:		{ //par
+    #####:  136:			state[1] = PCV_IN_PAUSE;
+    #####:  137:			iValve[1] = CLOSED;
+    #####:  138:			r_reset_timer(timerMaxInPause);
+        -:  139:		}//endpar
+    #####:  140:	}
+    #####:  141:	void Ventilatore3::r_PCVrm(){
+        -:  142:		{ //par
+    #####:  143:			state[1] = PCV_RM;
+    #####:  144:			r_reset_timer(timerMaxRmTime);
+        -:  145:		}//endpar
+    #####:  146:	}
+    #####:  147:	void Ventilatore3::r_PCVexpPause(){
+        -:  148:		{ //par
+    #####:  149:			state[1] = PCV_EXP_PAUSE;
+    #####:  150:			oValve[1] = CLOSED;
+    #####:  151:			r_reset_timer(timerMaxExpPause);
+        -:  152:		}//endpar
+    #####:  153:	}
+    #####:  154:	void Ventilatore3::r_PSVinPause(){
+        -:  155:		{ //par
+    #####:  156:			state[1] = PSV_IN_PAUSE;
+    #####:  157:			iValve[1] = CLOSED;
+    #####:  158:			r_reset_timer(timerMaxInPause);
+        -:  159:		}//endpar
+    #####:  160:	}
+    #####:  161:	void Ventilatore3::r_PSVinPauseFromPCV(){
+        -:  162:		{ //par
+    #####:  163:			state[1] = PSV_IN_PAUSE;
+    #####:  164:			iValve[1] = CLOSED;
+    #####:  165:			apneaBackupMode[1] = false;
+    #####:  166:			r_reset_timer(timerMaxInPause);
+        -:  167:		}//endpar
+    #####:  168:	}
+    #####:  169:	void Ventilatore3::r_PSVrm(){
+        -:  170:		{ //par
+    #####:  171:			state[1] = PSV_RM;
+    #####:  172:			r_reset_timer(timerMaxRmTime);
+        -:  173:		}//endpar
+    #####:  174:	}
+    #####:  175:	void Ventilatore3::r_PSVrmFromPCV(){
+        -:  176:		{ //par
+    #####:  177:			state[1] = PSV_RM;
+    #####:  178:			apneaBackupMode[1] = false;
+    #####:  179:			r_reset_timer(timerMaxRmTime);
+        -:  180:		}//endpar
+    #####:  181:	}
+    #####:  182:	void Ventilatore3::r_PSVexpPause(){
+        -:  183:		{ //par
+    #####:  184:			state[1] = PSV_EXP_PAUSE;
+    #####:  185:			oValve[1] = CLOSED;
+    #####:  186:			r_reset_timer(timerMaxExpPause);
+        -:  187:		}//endpar
+    #####:  188:	}
+    #####:  189:	void Ventilatore3::r_apneaAlarmOFF(){
+    #####:  190:		apneaAlarm[1] = false;
+    #####:  191:	}
+    #####:  192:	void Ventilatore3::r_enablePause(){
+    #####:  193:		pauseOff[1] = false;
+    #####:  194:	}
+       10:  195:	void Ventilatore3::r_Main(){
+       10:  196:		if (turnOFFbtn){ 
+        4:  197:				r_turnOff();
+        6:  198:		} else if (stopRequested & (state[0] == PCV_EXP)){ 
+    #####:  199:				r_ventOffPCV();
+        6:  200:		} else 	if (stopRequested & (state[0] == PSV_EXP)){ 
+    #####:  201:			r_ventOffPSV();
+        -:  202:			}else{
+        -:  203:			{ //par
+        6:  204:				if (expired(timerPauseTimeout) & (state[0] != PCV_IN_PAUSE) & (state[0] != PSV_IN_PAUSE) & (state[0] != PCV_EXP_PAUSE) & (state[0] != PSV_EXP_PAUSE)){ 
+    #####:  205:					r_enablePause();
+        -:  206:				}
+        6:  207:				if (apneaAlarm[0]){ 
+    #####:  208:					if ((turnOffApneaAlarm == YES) & (state[0] == PCV_INSP) | (state[0] == PCV_EXP)){ 
+    #####:  209:						r_apneaAlarmOFF();
+        -:  210:					}
+        -:  211:				}
+        6:  212:				if (stopRequested & (state[0] != STARTUP) & (state[0] != SELFTEST) & (state[0] != VENTILATIONOFF)){ 
+    #####:  213:					r_ventOffRequested();
+        -:  214:				}
+        6:  215:				if ((state[0] == STARTUP)){ 
+        5:  216:					if (startupEnded){ 
+        1:  217:						r_startupEnded();
+        -:  218:					}
+        -:  219:				}
+        6:  220:				if ((state[0] == SELFTEST)){ 
+        1:  221:					if (selfTestPassed | resume){ 
+    #####:  222:						r_ventOffFirstTime();
+        -:  223:					}
+        -:  224:				}
+        6:  225:				if ((state[0] == VENTILATIONOFF)){ 
+    #####:  226:					if (startVentilation){ 
+    #####:  227:						if ((respirationMode == PCV)){ 
+    #####:  228:								r_PCVinspOValve();
+    #####:  229:						} else if ((respirationMode == PSV)){ 
+    #####:  230:							r_PSVinspOValve();
+        -:  231:						}
+        -:  232:					}
+        -:  233:				}
+        6:  234:				if ((state[0] == PCV_INSP)){ 
+    #####:  235:					if (expired(timerInspirationDur)){ 
+    #####:  236:							if ((respirationMode == PSV)){ 
+    #####:  237:									if (inPause & ! (pauseOff[0])){ 
+    #####:  238:											r_PSVinPauseFromPCV();
+    #####:  239:									} else 	if (rm){ 
+    #####:  240:										r_PSVrmFromPCV();
+        -:  241:										}else{
+    #####:  242:										r_PSVexpIValveFromPCV();
+        -:  243:									}
+    #####:  244:							} else if (inPause & ! (pauseOff[0])){ 
+    #####:  245:									r_PCVinPause();
+    #####:  246:							} else 	if (rm){ 
+    #####:  247:								r_PCVrm();
+        -:  248:								}else{
+    #####:  249:								r_PCVexpIValve();
+        -:  250:							}
+    #####:  251:					} else if (pawGTMaxPinsp){ 
+    #####:  252:						r_PCVexpIValve();
+        -:  253:					}
+        -:  254:				}
+        6:  255:				if ((state[0] == PCV_IN_PAUSE)){ 
+    #####:  256:					if (expired(timerMaxInPause)){ 
+    #####:  257:							r_PCVexpPauseTimeout();
+    #####:  258:					} else if (! (inPause)){ 
+    #####:  259:						r_PCVexp();
+        -:  260:					}
+        -:  261:				}
+        6:  262:				if ((state[0] == PCV_RM)){ 
+    #####:  263:					if (expired(timerMaxRmTime) | rm){ 
+    #####:  264:						r_PCVexpIValve();
+        -:  265:					}
+        -:  266:				}
+        6:  267:				if ((state[0] == PCV_EXP)){ 
+    #####:  268:					if (expired(timerExpirationDur)){ 
+    #####:  269:								if (expPause & ! (pauseOff[0])){ 
+    #####:  270:								r_PCVexpPause();
+        -:  271:								}else{
+    #####:  272:								r_PCVinspOValve();
+        -:  273:							}
+    #####:  274:					} else if (expired(timerTriggerWindowDelay)){ 
+    #####:  275:							if (dropPAW_ITS_PCV){ 
+    #####:  276:									r_PCVinspOValve();
+    #####:  277:							} else if (stopVentilation[0]){ 
+    #####:  278:								r_ventOffPCV();
+        -:  279:							}
+    #####:  280:					} else if (stopVentilation[0]){ 
+    #####:  281:						r_ventOffPCV();
+        -:  282:					}
+        -:  283:				}
+        6:  284:				if ((state[0] == PCV_EXP_PAUSE)){ 
+    #####:  285:					if (expired(timerMaxExpPause)){ 
+    #####:  286:							r_PCVinspPauseTimeout();
+    #####:  287:					} else if (! (expPause)){ 
+    #####:  288:						r_PCVinsp();
+        -:  289:					}
+        -:  290:				}
+        6:  291:				if ((state[0] == PSV_INSP)){ 
+    #####:  292:					if (flowDropPSV | expired(timerMaxInspTimePSV)){ 
+    #####:  293:							if (inPause & ! (pauseOff[0])){ 
+    #####:  294:									r_PSVinPause();
+    #####:  295:							} else 	if (rm){ 
+    #####:  296:								r_PSVrm();
+        -:  297:								}else{
+    #####:  298:								r_PSVexpIValve();
+        -:  299:							}
+    #####:  300:					} else if (pawGTMaxPinsp){ 
+    #####:  301:						r_PSVexpIValve();
+        -:  302:					}
+        -:  303:				}
+        6:  304:				if ((state[0] == PSV_IN_PAUSE)){ 
+    #####:  305:					if (expired(timerMaxInPause)){ 
+    #####:  306:							r_PSVexpPauseTimeout();
+    #####:  307:					} else if (! (inPause)){ 
+    #####:  308:						r_PSVexp();
+        -:  309:					}
+        -:  310:				}
+        6:  311:				if ((state[0] == PSV_RM)){ 
+    #####:  312:					if (expired(timerMaxRmTime) | rm){ 
+    #####:  313:						r_PSVexpIValve();
+        -:  314:					}
+        -:  315:				}
+        6:  316:				if ((state[0] == PSV_EXP)){ 
+    #####:  317:					if (expired(timerTriggerWindowDelay) & dropPAW_ITS_PSV){ 
+    #####:  318:							r_PSVinspOValve();
+    #####:  319:					} else if (expired(timerApneaLag)){ 
+    #####:  320:							r_PCVinspApnea();
+    #####:  321:					} else if (expired(timerMinExpTimePSV) & (respirationMode == PSV) & expPause & ! (pauseOff[0])){ 
+    #####:  322:							r_PSVexpPause();
+    #####:  323:					} else if (stopVentilation[0]){ 
+    #####:  324:							r_ventOffPSV();
+    #####:  325:					} else if (expired(timerMinExpTimePSV) & (respirationMode == PCV)){ 
+    #####:  326:						r_PCVinspOValve();
+        -:  327:					}
+        -:  328:				}
+        6:  329:				if ((state[0] == PSV_EXP_PAUSE)){ 
+    #####:  330:					if (expired(timerMaxExpPause)){ 
+    #####:  331:							r_PSVinspPauseTimeout();
+    #####:  332:					} else if (! (expPause)){ 
+    #####:  333:						r_PSVinsp();
+        -:  334:					}
+        -:  335:				}
+        -:  336:			}//endpar
+        -:  337:		}
+       10:  338:	}
+        -:  339:	
+        -:  340:	/* Static function definition */
+        -:  341:	/* Function and domain initialization */
+       5*:  342:	Ventilatore3::Ventilatore3(): 
+        -:  343:	//Static domain initialization 
+        -:  344:	States_elems({STARTUP,SELFTEST,VENTILATIONOFF,PCV_INSP,PCV_EXP,PSV_INSP,PSV_EXP,PCV_IN_PAUSE,PCV_EXP_PAUSE,PSV_IN_PAUSE,PSV_EXP_PAUSE,PCV_RM,PSV_RM,OFF}), 
+        -:  345:	Modes_elems({PCV,PSV}), 
+        -:  346:	ValveStatus_elems({OPEN,CLOSED}), 
+       5*:  347:	YesOrNo_elems({YES,NO})
+        -:  348:	{
+        -:  349:	/* Init static functions Abstract domain */
+       5*:  350:	timerInspirationDur = new Timer;
+       5*:  351:	timerExpirationDur = new Timer;
+       5*:  352:	timerMaxInspTimePSV = new Timer;
+       5*:  353:	timerMinExpTimePSV = new Timer;
+       5*:  354:	timerApneaLag = new Timer;
+       5*:  355:	timerMaxInPause = new Timer;
+       5*:  356:	timerMaxRmTime = new Timer;
+       5*:  357:	timerMaxExpPause = new Timer;
+       5*:  358:	timerTriggerWindowDelay = new Timer;
+       5*:  359:	timerPauseTimeout = new Timer;
+        -:  360:	/* Function initialization */
+       5*:  361:	state[0] = state[1] = STARTUP;
+       5*:  362:	iValve[0] = iValve[1] = CLOSED;
+       5*:  363:	oValve[0] = oValve[1] = OPEN;
+       5*:  364:	stopVentilation[0] = stopVentilation[1] = false;
+       5*:  365:	apneaAlarm[0] = apneaAlarm[1] = false;
+       5*:  366:	apneaBackupMode[0] = apneaBackupMode[1] = false;
+       5*:  367:	pauseOff[0] = pauseOff[1] = false;
+     155*:  368:	for(const auto& _t : Timer::elems){
+     300*:  369:	duration[0].insert({_t,[&](){      /*<--- caseTerm*/ 
+        -:  370:		if(_t==timerInspirationDur) 
+        -:  371:			return 2;
+        -:  372:		else if(_t==timerExpirationDur)
+        -:  373:			return 4;
+        -:  374:		else if(_t==timerMaxInspTimePSV)
+        -:  375:			return 7;
+        -:  376:		else if(_t==timerMinExpTimePSV)
+        -:  377:			return 1;
+        -:  378:		else if(_t==timerApneaLag)
+        -:  379:			return 10;
+        -:  380:		else if(_t==timerMaxInPause)
+        -:  381:			return 40;
+        -:  382:		else if(_t==timerMaxRmTime)
+        -:  383:			return 10;
+        -:  384:		else if(_t==timerMaxExpPause)
+        -:  385:			return 60;
+        -:  386:		else if(_t==timerTriggerWindowDelay)
+        -:  387:			return 700;
+        -:  388:		else if(_t==timerPauseTimeout)
+        -:  389:			return 120;
+     150*:  390:	   }()});
+     300*:  391:	duration[1].insert({_t,[&](){      /*<--- caseTerm*/ 
+        -:  392:		if(_t==timerInspirationDur) 
+        -:  393:			return 2;
+        -:  394:		else if(_t==timerExpirationDur)
+        -:  395:			return 4;
+        -:  396:		else if(_t==timerMaxInspTimePSV)
+        -:  397:			return 7;
+        -:  398:		else if(_t==timerMinExpTimePSV)
+        -:  399:			return 1;
+        -:  400:		else if(_t==timerApneaLag)
+        -:  401:			return 10;
+        -:  402:		else if(_t==timerMaxInPause)
+        -:  403:			return 40;
+        -:  404:		else if(_t==timerMaxRmTime)
+        -:  405:			return 10;
+        -:  406:		else if(_t==timerMaxExpPause)
+        -:  407:			return 60;
+        -:  408:		else if(_t==timerTriggerWindowDelay)
+        -:  409:			return 700;
+        -:  410:		else if(_t==timerPauseTimeout)
+        -:  411:			return 120;
+     150*:  412:	   }()});
+        -:  413:	}
+     155*:  414:	for(const auto& _t : Timer::elems){
+     150*:  415:	start[0].insert({_t,currentTime(_t)});
+     150*:  416:	start[1].insert({_t,currentTime(_t)});
+        -:  417:	}
+     155*:  418:	for(const auto& _t : Timer::elems){
+     300*:  419:	timerUnit[0].insert({_t,[&](){      /*<--- caseTerm*/ 
+        -:  420:		if(_t==timerInspirationDur) 
+        -:  421:			return SEC;
+        -:  422:		else if(_t==timerExpirationDur)
+        -:  423:			return SEC;
+        -:  424:		else if(_t==timerMaxInspTimePSV)
+        -:  425:			return SEC;
+        -:  426:		else if(_t==timerMinExpTimePSV)
+        -:  427:			return SEC;
+        -:  428:		else if(_t==timerApneaLag)
+        -:  429:			return SEC;
+        -:  430:		else if(_t==timerMaxInPause)
+        -:  431:			return SEC;
+        -:  432:		else if(_t==timerMaxRmTime)
+        -:  433:			return SEC;
+        -:  434:		else if(_t==timerMaxExpPause)
+        -:  435:			return SEC;
+        -:  436:		else if(_t==timerTriggerWindowDelay)
+        -:  437:			return MILLISEC;
+        -:  438:		else if(_t==timerPauseTimeout)
+        -:  439:			return SEC;
+     150*:  440:	   }()});
+     300*:  441:	timerUnit[1].insert({_t,[&](){      /*<--- caseTerm*/ 
+        -:  442:		if(_t==timerInspirationDur) 
+        -:  443:			return SEC;
+        -:  444:		else if(_t==timerExpirationDur)
+        -:  445:			return SEC;
+        -:  446:		else if(_t==timerMaxInspTimePSV)
+        -:  447:			return SEC;
+        -:  448:		else if(_t==timerMinExpTimePSV)
+        -:  449:			return SEC;
+        -:  450:		else if(_t==timerApneaLag)
+        -:  451:			return SEC;
+        -:  452:		else if(_t==timerMaxInPause)
+        -:  453:			return SEC;
+        -:  454:		else if(_t==timerMaxRmTime)
+        -:  455:			return SEC;
+        -:  456:		else if(_t==timerMaxExpPause)
+        -:  457:			return SEC;
+        -:  458:		else if(_t==timerTriggerWindowDelay)
+        -:  459:			return MILLISEC;
+        -:  460:		else if(_t==timerPauseTimeout)
+        -:  461:			return SEC;
+     150*:  462:	   }()});
+        -:  463:	}
+       5*:  464:	}
+------------------
+Ventilatore3::Ventilatore3():
+        5:  342:	Ventilatore3::Ventilatore3(): 
+        -:  343:	//Static domain initialization 
+        -:  344:	States_elems({STARTUP,SELFTEST,VENTILATIONOFF,PCV_INSP,PCV_EXP,PSV_INSP,PSV_EXP,PCV_IN_PAUSE,PCV_EXP_PAUSE,PSV_IN_PAUSE,PSV_EXP_PAUSE,PCV_RM,PSV_RM,OFF}), 
+        -:  345:	Modes_elems({PCV,PSV}), 
+        -:  346:	ValveStatus_elems({OPEN,CLOSED}), 
+        5:  347:	YesOrNo_elems({YES,NO})
+        -:  348:	{
+        -:  349:	/* Init static functions Abstract domain */
+        5:  350:	timerInspirationDur = new Timer;
+        5:  351:	timerExpirationDur = new Timer;
+        5:  352:	timerMaxInspTimePSV = new Timer;
+        5:  353:	timerMinExpTimePSV = new Timer;
+        5:  354:	timerApneaLag = new Timer;
+        5:  355:	timerMaxInPause = new Timer;
+        5:  356:	timerMaxRmTime = new Timer;
+        5:  357:	timerMaxExpPause = new Timer;
+        5:  358:	timerTriggerWindowDelay = new Timer;
+        5:  359:	timerPauseTimeout = new Timer;
+        -:  360:	/* Function initialization */
+        5:  361:	state[0] = state[1] = STARTUP;
+        5:  362:	iValve[0] = iValve[1] = CLOSED;
+        5:  363:	oValve[0] = oValve[1] = OPEN;
+        5:  364:	stopVentilation[0] = stopVentilation[1] = false;
+        5:  365:	apneaAlarm[0] = apneaAlarm[1] = false;
+        5:  366:	apneaBackupMode[0] = apneaBackupMode[1] = false;
+        5:  367:	pauseOff[0] = pauseOff[1] = false;
+      155:  368:	for(const auto& _t : Timer::elems){
+      300:  369:	duration[0].insert({_t,[&](){      /*<--- caseTerm*/ 
+        -:  370:		if(_t==timerInspirationDur) 
+        -:  371:			return 2;
+        -:  372:		else if(_t==timerExpirationDur)
+        -:  373:			return 4;
+        -:  374:		else if(_t==timerMaxInspTimePSV)
+        -:  375:			return 7;
+        -:  376:		else if(_t==timerMinExpTimePSV)
+        -:  377:			return 1;
+        -:  378:		else if(_t==timerApneaLag)
+        -:  379:			return 10;
+        -:  380:		else if(_t==timerMaxInPause)
+        -:  381:			return 40;
+        -:  382:		else if(_t==timerMaxRmTime)
+        -:  383:			return 10;
+        -:  384:		else if(_t==timerMaxExpPause)
+        -:  385:			return 60;
+        -:  386:		else if(_t==timerTriggerWindowDelay)
+        -:  387:			return 700;
+        -:  388:		else if(_t==timerPauseTimeout)
+        -:  389:			return 120;
+      150:  390:	   }()});
+      300:  391:	duration[1].insert({_t,[&](){      /*<--- caseTerm*/ 
+        -:  392:		if(_t==timerInspirationDur) 
+        -:  393:			return 2;
+        -:  394:		else if(_t==timerExpirationDur)
+        -:  395:			return 4;
+        -:  396:		else if(_t==timerMaxInspTimePSV)
+        -:  397:			return 7;
+        -:  398:		else if(_t==timerMinExpTimePSV)
+        -:  399:			return 1;
+        -:  400:		else if(_t==timerApneaLag)
+        -:  401:			return 10;
+        -:  402:		else if(_t==timerMaxInPause)
+        -:  403:			return 40;
+        -:  404:		else if(_t==timerMaxRmTime)
+        -:  405:			return 10;
+        -:  406:		else if(_t==timerMaxExpPause)
+        -:  407:			return 60;
+        -:  408:		else if(_t==timerTriggerWindowDelay)
+        -:  409:			return 700;
+        -:  410:		else if(_t==timerPauseTimeout)
+        -:  411:			return 120;
+      150:  412:	   }()});
+        -:  413:	}
+      155:  414:	for(const auto& _t : Timer::elems){
+      150:  415:	start[0].insert({_t,currentTime(_t)});
+      150:  416:	start[1].insert({_t,currentTime(_t)});
+        -:  417:	}
+      155:  418:	for(const auto& _t : Timer::elems){
+      300:  419:	timerUnit[0].insert({_t,[&](){      /*<--- caseTerm*/ 
+        -:  420:		if(_t==timerInspirationDur) 
+        -:  421:			return SEC;
+        -:  422:		else if(_t==timerExpirationDur)
+        -:  423:			return SEC;
+        -:  424:		else if(_t==timerMaxInspTimePSV)
+        -:  425:			return SEC;
+        -:  426:		else if(_t==timerMinExpTimePSV)
+        -:  427:			return SEC;
+        -:  428:		else if(_t==timerApneaLag)
+        -:  429:			return SEC;
+        -:  430:		else if(_t==timerMaxInPause)
+        -:  431:			return SEC;
+        -:  432:		else if(_t==timerMaxRmTime)
+        -:  433:			return SEC;
+        -:  434:		else if(_t==timerMaxExpPause)
+        -:  435:			return SEC;
+        -:  436:		else if(_t==timerTriggerWindowDelay)
+        -:  437:			return MILLISEC;
+        -:  438:		else if(_t==timerPauseTimeout)
+        -:  439:			return SEC;
+      150:  440:	   }()});
+      300:  441:	timerUnit[1].insert({_t,[&](){      /*<--- caseTerm*/ 
+        -:  442:		if(_t==timerInspirationDur) 
+        -:  443:			return SEC;
+        -:  444:		else if(_t==timerExpirationDur)
+        -:  445:			return SEC;
+        -:  446:		else if(_t==timerMaxInspTimePSV)
+        -:  447:			return SEC;
+        -:  448:		else if(_t==timerMinExpTimePSV)
+        -:  449:			return SEC;
+        -:  450:		else if(_t==timerApneaLag)
+        -:  451:			return SEC;
+        -:  452:		else if(_t==timerMaxInPause)
+        -:  453:			return SEC;
+        -:  454:		else if(_t==timerMaxRmTime)
+        -:  455:			return SEC;
+        -:  456:		else if(_t==timerMaxExpPause)
+        -:  457:			return SEC;
+        -:  458:		else if(_t==timerTriggerWindowDelay)
+        -:  459:			return MILLISEC;
+        -:  460:		else if(_t==timerPauseTimeout)
+        -:  461:			return SEC;
+      150:  462:	   }()});
+        -:  463:	}
+        5:  464:	}
+------------------
+Ventilatore3::Ventilatore3():
+    #####:  342:	Ventilatore3::Ventilatore3(): 
+        -:  343:	//Static domain initialization 
+        -:  344:	States_elems({STARTUP,SELFTEST,VENTILATIONOFF,PCV_INSP,PCV_EXP,PSV_INSP,PSV_EXP,PCV_IN_PAUSE,PCV_EXP_PAUSE,PSV_IN_PAUSE,PSV_EXP_PAUSE,PCV_RM,PSV_RM,OFF}), 
+        -:  345:	Modes_elems({PCV,PSV}), 
+        -:  346:	ValveStatus_elems({OPEN,CLOSED}), 
+    #####:  347:	YesOrNo_elems({YES,NO})
+        -:  348:	{
+        -:  349:	/* Init static functions Abstract domain */
+    #####:  350:	timerInspirationDur = new Timer;
+    #####:  351:	timerExpirationDur = new Timer;
+    #####:  352:	timerMaxInspTimePSV = new Timer;
+    #####:  353:	timerMinExpTimePSV = new Timer;
+    #####:  354:	timerApneaLag = new Timer;
+    #####:  355:	timerMaxInPause = new Timer;
+    #####:  356:	timerMaxRmTime = new Timer;
+    #####:  357:	timerMaxExpPause = new Timer;
+    #####:  358:	timerTriggerWindowDelay = new Timer;
+    #####:  359:	timerPauseTimeout = new Timer;
+        -:  360:	/* Function initialization */
+    #####:  361:	state[0] = state[1] = STARTUP;
+    #####:  362:	iValve[0] = iValve[1] = CLOSED;
+    #####:  363:	oValve[0] = oValve[1] = OPEN;
+    #####:  364:	stopVentilation[0] = stopVentilation[1] = false;
+    #####:  365:	apneaAlarm[0] = apneaAlarm[1] = false;
+    #####:  366:	apneaBackupMode[0] = apneaBackupMode[1] = false;
+    #####:  367:	pauseOff[0] = pauseOff[1] = false;
+    #####:  368:	for(const auto& _t : Timer::elems){
+    #####:  369:	duration[0].insert({_t,[&](){      /*<--- caseTerm*/ 
+        -:  370:		if(_t==timerInspirationDur) 
+        -:  371:			return 2;
+        -:  372:		else if(_t==timerExpirationDur)
+        -:  373:			return 4;
+        -:  374:		else if(_t==timerMaxInspTimePSV)
+        -:  375:			return 7;
+        -:  376:		else if(_t==timerMinExpTimePSV)
+        -:  377:			return 1;
+        -:  378:		else if(_t==timerApneaLag)
+        -:  379:			return 10;
+        -:  380:		else if(_t==timerMaxInPause)
+        -:  381:			return 40;
+        -:  382:		else if(_t==timerMaxRmTime)
+        -:  383:			return 10;
+        -:  384:		else if(_t==timerMaxExpPause)
+        -:  385:			return 60;
+        -:  386:		else if(_t==timerTriggerWindowDelay)
+        -:  387:			return 700;
+        -:  388:		else if(_t==timerPauseTimeout)
+        -:  389:			return 120;
+    #####:  390:	   }()});
+    #####:  391:	duration[1].insert({_t,[&](){      /*<--- caseTerm*/ 
+        -:  392:		if(_t==timerInspirationDur) 
+        -:  393:			return 2;
+        -:  394:		else if(_t==timerExpirationDur)
+        -:  395:			return 4;
+        -:  396:		else if(_t==timerMaxInspTimePSV)
+        -:  397:			return 7;
+        -:  398:		else if(_t==timerMinExpTimePSV)
+        -:  399:			return 1;
+        -:  400:		else if(_t==timerApneaLag)
+        -:  401:			return 10;
+        -:  402:		else if(_t==timerMaxInPause)
+        -:  403:			return 40;
+        -:  404:		else if(_t==timerMaxRmTime)
+        -:  405:			return 10;
+        -:  406:		else if(_t==timerMaxExpPause)
+        -:  407:			return 60;
+        -:  408:		else if(_t==timerTriggerWindowDelay)
+        -:  409:			return 700;
+        -:  410:		else if(_t==timerPauseTimeout)
+        -:  411:			return 120;
+    #####:  412:	   }()});
+        -:  413:	}
+    #####:  414:	for(const auto& _t : Timer::elems){
+    #####:  415:	start[0].insert({_t,currentTime(_t)});
+    #####:  416:	start[1].insert({_t,currentTime(_t)});
+        -:  417:	}
+    #####:  418:	for(const auto& _t : Timer::elems){
+    #####:  419:	timerUnit[0].insert({_t,[&](){      /*<--- caseTerm*/ 
+        -:  420:		if(_t==timerInspirationDur) 
+        -:  421:			return SEC;
+        -:  422:		else if(_t==timerExpirationDur)
+        -:  423:			return SEC;
+        -:  424:		else if(_t==timerMaxInspTimePSV)
+        -:  425:			return SEC;
+        -:  426:		else if(_t==timerMinExpTimePSV)
+        -:  427:			return SEC;
+        -:  428:		else if(_t==timerApneaLag)
+        -:  429:			return SEC;
+        -:  430:		else if(_t==timerMaxInPause)
+        -:  431:			return SEC;
+        -:  432:		else if(_t==timerMaxRmTime)
+        -:  433:			return SEC;
+        -:  434:		else if(_t==timerMaxExpPause)
+        -:  435:			return SEC;
+        -:  436:		else if(_t==timerTriggerWindowDelay)
+        -:  437:			return MILLISEC;
+        -:  438:		else if(_t==timerPauseTimeout)
+        -:  439:			return SEC;
+    #####:  440:	   }()});
+    #####:  441:	timerUnit[1].insert({_t,[&](){      /*<--- caseTerm*/ 
+        -:  442:		if(_t==timerInspirationDur) 
+        -:  443:			return SEC;
+        -:  444:		else if(_t==timerExpirationDur)
+        -:  445:			return SEC;
+        -:  446:		else if(_t==timerMaxInspTimePSV)
+        -:  447:			return SEC;
+        -:  448:		else if(_t==timerMinExpTimePSV)
+        -:  449:			return SEC;
+        -:  450:		else if(_t==timerApneaLag)
+        -:  451:			return SEC;
+        -:  452:		else if(_t==timerMaxInPause)
+        -:  453:			return SEC;
+        -:  454:		else if(_t==timerMaxRmTime)
+        -:  455:			return SEC;
+        -:  456:		else if(_t==timerMaxExpPause)
+        -:  457:			return SEC;
+        -:  458:		else if(_t==timerTriggerWindowDelay)
+        -:  459:			return MILLISEC;
+        -:  460:		else if(_t==timerPauseTimeout)
+        -:  461:			return SEC;
+    #####:  462:	   }()});
+        -:  463:	}
+    #####:  464:	}
+------------------
+        -:  465:
+        -:  466:	
+        -:  467:	/* initialize controlled functions that contains monitored functions in the init term */
+        5:  468:	void Ventilatore3::initControlledWithMonitored(){
+        5:  469:	}
+        -:  470:	
+        -:  471:
+        -:  472:	/* Apply the update set */
+       10:  473:	void Ventilatore3::fireUpdateSet(){
+       10:  474:	TimeLibrary::fireUpdateSet();
+       10:  475:	stopVentilation[0] = stopVentilation[1];
+       10:  476:	state[0] = state[1];
+       10:  477:	iValve[0] = iValve[1];
+       10:  478:	oValve[0] = oValve[1];
+       10:  479:	apneaAlarm[0] = apneaAlarm[1];
+       10:  480:	apneaBackupMode[0] = apneaBackupMode[1];
+       10:  481:	pauseOff[0] = pauseOff[1];
+       10:  482:	start[0] = start[1];
+       10:  483:	duration[0] = duration[1];
+       10:  484:	timerUnit[0] = timerUnit[1];
+       10:  485:}
+        -:  486:
+        -:  487:/* init static functions and elements of abstract domains */
+        -:  488:Timer*Ventilatore3::timerInspirationDur;
+        -:  489:Timer*Ventilatore3::timerExpirationDur;
+        -:  490:Timer*Ventilatore3::timerMaxInspTimePSV;
+        -:  491:Timer*Ventilatore3::timerMinExpTimePSV;
+        -:  492:Timer*Ventilatore3::timerApneaLag;
+        -:  493:Timer*Ventilatore3::timerMaxInPause;
+        -:  494:Timer*Ventilatore3::timerMaxRmTime;
+        -:  495:Timer*Ventilatore3::timerMaxExpPause;
+        -:  496:Timer*Ventilatore3::timerTriggerWindowDelay;
+        -:  497:Timer*Ventilatore3::timerPauseTimeout;
+        -:  498:
